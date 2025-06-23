@@ -1,0 +1,13 @@
+# Images Directory
+
+This directory contains all the images for the landing pages.
+
+## Structure:
+- /brand/ - Logo and brand assets
+- /skin-care/ - Skin care landing page images
+- /pain-relief/ - Pain relief landing page images
+- /wholesale/ - Wholesale landing page images
+- /trust/ - Trust badges and certificates
+- /products/ - Product images
+
+For now, the project uses placeholder images from Unsplash and placeholder services. 

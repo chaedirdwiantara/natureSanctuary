@@ -1,0 +1,179 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+/* Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans antialiased;
+    transition: all 0.3s ease;
+    overflow-x: hidden;
+  }
+
+  /* Theme Classes */
+  .theme-skincare {
+    --primary-color: theme('colors.skincare.primary');
+    --secondary-color: theme('colors.skincare.secondary');
+    --accent-color: theme('colors.skincare.accent');
+    --bg-color: theme('colors.skincare.bg');
+  }
+
+  .theme-painrelief {
+    --primary-color: theme('colors.painrelief.primary');
+    --secondary-color: theme('colors.painrelief.secondary');
+    --accent-color: theme('colors.painrelief.accent');
+    --bg-color: theme('colors.painrelief.bg');
+  }
+
+  .theme-wholesale {
+    --primary-color: theme('colors.wholesale.primary');
+    --secondary-color: theme('colors.wholesale.secondary');
+    --accent-color: theme('colors.wholesale.accent');
+    --bg-color: theme('colors.wholesale.bg');
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Component Styles */
+@layer components {
+  .btn-primary {
+    @apply px-8 py-4 rounded-lg font-semibold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-300 border-2;
+  }
+
+  .btn-skincare {
+    @apply btn-primary bg-skincare-primary hover:bg-skincare-accent shadow-glow-green;
+  }
+
+  .btn-skincare-outline {
+    @apply btn-secondary border-skincare-primary text-skincare-primary hover:bg-skincare-primary hover:text-white;
+  }
+
+  .btn-painrelief {
+    @apply btn-primary bg-painrelief-primary hover:bg-painrelief-accent shadow-glow-orange;
+  }
+
+  .btn-painrelief-outline {
+    @apply btn-secondary border-painrelief-primary text-painrelief-primary hover:bg-painrelief-primary hover:text-white;
+  }
+
+  .btn-wholesale {
+    @apply btn-primary bg-wholesale-primary hover:bg-wholesale-accent shadow-glow-blue;
+  }
+
+  .btn-wholesale-outline {
+    @apply btn-secondary border-wholesale-primary text-wholesale-primary hover:bg-wholesale-primary hover:text-white;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .gradient-skincare {
+    background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+  }
+
+  .gradient-painrelief {
+    background: linear-gradient(135deg, #ffccbc 0%, #fff3e0 100%);
+  }
+
+  .gradient-wholesale {
+    background: linear-gradient(135deg, #bbdefb 0%, #e3f2fd 100%);
+  }
+
+  .text-gradient-skincare {
+    @apply bg-gradient-to-r from-skincare-accent to-skincare-primary bg-clip-text text-transparent;
+  }
+
+  .text-gradient-painrelief {
+    @apply bg-gradient-to-r from-painrelief-accent to-painrelief-primary bg-clip-text text-transparent;
+  }
+
+  .text-gradient-wholesale {
+    @apply bg-gradient-to-r from-wholesale-accent to-wholesale-primary bg-clip-text text-transparent;
+  }
+
+  .card-hover {
+    @apply transform transition-all duration-300 hover:scale-105 hover:shadow-card;
+  }
+
+  .testimonial-card {
+    @apply bg-white rounded-lg p-6 shadow-soft hover:shadow-card transition-all duration-300;
+  }
+
+  .product-card {
+    @apply bg-white rounded-lg overflow-hidden shadow-soft hover:shadow-card transition-all duration-300 transform hover:scale-105;
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  }
+}
+
+/* Utility Classes */
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .backdrop-blur-custom {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-600;
+}
+
+/* Loading States */
+.loading-skeleton {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+/* Form Styles */
+.form-input {
+  @apply w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300;
+}
+
+.form-textarea {
+  @apply w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none;
+} 
