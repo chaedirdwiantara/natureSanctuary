@@ -6,11 +6,57 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Layout from '../../components/shared/Layout';
 import Button from '../../components/shared/Button';
 import LeadCaptureForm from '../../components/shared/LeadCaptureForm';
+import CustomLeadForm from '../../components/shared/CustomLeadForm';
 import { Icons } from '../../components/shared/Icons';
 import { landingPageContent } from '../../lib/content';
 
 export default function PainReliefLanding() {
   const content = landingPageContent.painRelief;
+
+  // Form fields configuration
+  const painReliefFormFields = [
+    {
+      name: 'fullName',
+      label: 'Full Name',
+      type: 'text',
+      placeholder: 'Enter your full name',
+      icon: '👤',
+      required: true,
+      validation: { required: 'Name is required' }
+    },
+    {
+      name: 'email',
+      label: 'Professional Email',
+      type: 'email',
+      placeholder: 'Enter your professional email',
+      icon: '📧',
+      required: true,
+      validation: { 
+        required: 'Email is required',
+        pattern: {
+          value: /^\S+@\S+$/i,
+          message: 'Please enter a valid email address'
+        }
+      }
+    },
+    {
+      name: 'clinicName',
+      label: 'Clinic/Practice Name',
+      type: 'text',
+      placeholder: 'Enter clinic or practice name',
+      icon: '🏥',
+      required: true,
+      validation: { required: 'Clinic/Practice name is required' }
+    },
+    {
+      name: 'phone',
+      label: 'Phone Number (Optional)',
+      type: 'tel',
+      placeholder: 'Enter your phone number',
+      icon: '📞',
+      required: false
+    }
+  ];
 
   // Carousel images - only muscle-hero and painrelief-hero
   const carouselImages = [
@@ -480,89 +526,14 @@ export default function PainReliefLanding() {
                 </div>
               </div>
 
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name *
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="text-gray-400">👤</span>
-                      </div>
-                      <input
-                        type="text"
-                        placeholder="Enter your full name"
-                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-painrelief-primary focus:border-transparent"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Professional Email *
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="text-gray-400">📧</span>
-                      </div>
-                      <input
-                        type="email"
-                        placeholder="Enter your professional email"
-                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-painrelief-primary focus:border-transparent"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Clinic/Practice Name *
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="text-gray-400">🏥</span>
-                      </div>
-                      <input
-                        type="text"
-                        placeholder="Enter clinic or practice name"
-                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-painrelief-primary focus:border-transparent"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number (Optional)
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="text-gray-400">📞</span>
-                      </div>
-                      <input
-                        type="tel"
-                        placeholder="Enter your phone number"
-                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-painrelief-primary focus:border-transparent"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <Button
-                  variant="primary"
-                  theme="painrelief"
-                  size="lg"
-                  className="w-full shadow-glow-orange text-lg py-4"
-                >
-                  Get Professional Guide & Pricing
-                </Button>
-
-                <div className="text-center text-sm text-gray-600">
-                  <p>We respect your privacy. Unsubscribe at any time.</p>
-                  <p>By submitting, you agree to our <span className="text-painrelief-primary">Privacy Policy</span>.</p>
-                </div>
-              </form>
+              <CustomLeadForm
+                theme="painrelief"
+                title="Get Your Professional Pain Relief Guide"
+                subtitle="Download our clinical guide plus get exclusive healthcare professional pricing"
+                offerText="15% OFF + Free Shipping"
+                ctaText="Get Professional Guide & Pricing"
+                fields={painReliefFormFields}
+              />
             </motion.div>
           </div>
         </div>

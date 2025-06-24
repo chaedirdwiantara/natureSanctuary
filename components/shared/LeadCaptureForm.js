@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { FiMail, FiUser, FiPhone, FiCheck, FiLoader } from 'react-icons/fi';
+import emailjs from 'emailjs-com';
 import Button from './Button';
 
 export default function LeadCaptureForm({ 
@@ -14,23 +15,53 @@ export default function LeadCaptureForm({
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
+    setSubmitError('');
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Here you would integrate with your email service
-      console.log('Form submitted:', data);
-      
+      // EmailJS configuration
+      const templateParams = {
+        to_name: 'Emu Oil Naturally Team',
+        from_name: data.name,
+        from_email: data.email,
+        phone: data.phone || 'Not provided',
+        landing_page: theme,
+        current_url: window.location.href,
+        timestamp: new Date().toLocaleString(),
+        message: `New lead from ${theme} landing page`,
+        reply_to: data.email
+      };
+
+      // Send email using EmailJS
+      // EmailJS credentials from environment variables
+      const result = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_USER_ID
+      );
+
+      console.log('Email sent successfully:', result);
       setIsSubmitted(true);
       reset();
+      
+      // Optional: Track conversion for analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'form_submit', {
+          event_category: 'Lead Generation',
+          event_label: theme,
+          value: 1
+        });
+      }
+      
     } catch (error) {
       console.error('Form submission error:', error);
+      setSubmitError('Failed to send. Please try again or contact us directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -188,6 +219,12 @@ export default function LeadCaptureForm({
         </div>
 
         {/* Submit Button */}
+        {submitError && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
+            <p className="text-red-700 text-sm">{submitError}</p>
+          </div>
+        )}
+        
         <Button
           type="submit"
           variant="primary"
