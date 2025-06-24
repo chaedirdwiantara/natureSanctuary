@@ -251,11 +251,11 @@ export default function SkinCareLanding() {
           >
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-6">
               Real People, Real
-              <span className="text-gradient-skincare"> Results</span>
+              <span className="text-gradient-skincare"> Healing Results</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Don't just take our word for it. Here's what our customers are saying 
-              about their skin transformation.
+              From skin transformation to pain relief - here's what our customers are saying 
+              about their complete healing journey.
             </p>
           </motion.div>
 
@@ -310,78 +310,190 @@ export default function SkinCareLanding() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-skincare-accent mb-6">
-              Choose Your 
-              <span className="text-skincare-primary"> Skin Care Solution</span>
+              Complete Natural Healing
+              <span className="text-skincare-primary"> Solutions</span>
             </h2>
-            <p className="text-xl text-skincare-accent opacity-80 max-w-3xl mx-auto leading-relaxed">
-              All products come with our 30-day money-back guarantee and free shipping.
+            <p className="text-xl text-skincare-accent opacity-80 max-w-4xl mx-auto leading-relaxed mb-8">
+              From skin conditions to pain relief - all products work together for comprehensive healing.
             </p>
+            
+            {/* Category Tabs */}
+            <div className="flex justify-center space-x-4 mb-12">
+              <div className="bg-skincare-primary text-white px-6 py-3 rounded-full">
+                <span className="font-semibold">🌿 Skin Care Products</span>
+              </div>
+              <div className="bg-skincare-accent text-white px-6 py-3 rounded-full">
+                <span className="font-semibold">💪 Pain Relief Products</span>
+              </div>
+            </div>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {content.products.map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`product-card relative ${product.popular ? 'ring-2 ring-skincare-primary' : ''}`}
-              >
-                {product.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-skincare-primary text-white px-4 py-1 rounded-full text-sm font-bold">
-                      Most Popular
-                    </span>
+          {/* Skin Care Products */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-serif font-bold text-skincare-accent mb-8 text-center">
+              🌿 For Skin Conditions (Eczema, Psoriasis, Dry Skin)
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {content.products.filter(product => product.category === 'skin' || product.category === 'both').map((product, index) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className={`product-card relative ${product.popular ? 'ring-2 ring-skincare-primary' : ''}`}
+                >
+                  {product.popular && (
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                      <span className="bg-skincare-primary text-white px-4 py-1 rounded-full text-sm font-bold">
+                        Most Popular
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="p-6">
+                    <div className="relative w-24 h-24 mx-auto mb-4">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+
+                    <h4 className="text-lg font-serif font-bold text-gray-800 mb-2 text-center">
+                      {product.name}
+                    </h4>
+
+                    <div className="text-center mb-3">
+                      <span className="text-xl font-bold text-skincare-primary">
+                        ${product.salePrice}
+                      </span>
+                      <span className="text-sm text-gray-500 line-through ml-2">
+                        ${product.price}
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-skincare-accent text-center mb-3 font-medium">
+                      {product.bestFor}
+                    </p>
+
+                    <ul className="space-y-1 mb-4">
+                      {product.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-center text-xs text-gray-600">
+                          <span className="text-skincare-primary mr-2">✓</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Button
+                      variant="primary"
+                      theme="skincare"
+                      size="sm"
+                      className="w-full"
+                    >
+                      Add to Cart
+                    </Button>
                   </div>
-                )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
 
-                <div className="p-6">
-                  <div className="relative w-32 h-32 mx-auto mb-6">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-contain"
-                    />
+          {/* Pain Relief Products */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-serif font-bold text-skincare-accent mb-8 text-center">
+              💪 For Pain Relief (Arthritis, Joint Pain, Muscle Pain)
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {content.products.filter(product => product.category === 'pain' || product.category === 'both').map((product, index) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className={`product-card relative ${product.popular ? 'ring-2 ring-skincare-primary' : ''}`}
+                >
+                  {product.popular && (
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                      <span className="bg-skincare-primary text-white px-4 py-1 rounded-full text-sm font-bold">
+                        Most Popular
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="p-6">
+                    <div className="relative w-24 h-24 mx-auto mb-4">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+
+                    <h4 className="text-lg font-serif font-bold text-gray-800 mb-2 text-center">
+                      {product.name}
+                    </h4>
+
+                    <div className="text-center mb-3">
+                      <span className="text-xl font-bold text-skincare-primary">
+                        ${product.salePrice}
+                      </span>
+                      <span className="text-sm text-gray-500 line-through ml-2">
+                        ${product.price}
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-skincare-accent text-center mb-3 font-medium">
+                      {product.bestFor}
+                    </p>
+
+                    <ul className="space-y-1 mb-4">
+                      {product.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-center text-xs text-gray-600">
+                          <span className="text-skincare-primary mr-2">✓</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Button
+                      variant="primary"
+                      theme="skincare"
+                      size="sm"
+                      className="w-full"
+                    >
+                      Add to Cart
+                    </Button>
                   </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
 
-                  <h3 className="text-xl font-serif font-bold text-gray-800 mb-2 text-center">
-                    {product.name}
-                  </h3>
-
-                  <div className="text-center mb-4">
-                    <span className="text-2xl font-bold text-skincare-primary">
-                      ${product.salePrice}
-                    </span>
-                    <span className="text-lg text-gray-500 line-through ml-2">
-                      ${product.price}
-                    </span>
-                  </div>
-
-                  <p className="text-sm text-skincare-accent text-center mb-4 font-medium">
-                    {product.bestFor}
-                  </p>
-
-                  <ul className="space-y-2 mb-6">
-                    {product.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-600">
-                        <span className="text-skincare-primary mr-2">✓</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Button
-                    variant="primary"
-                    theme="skincare"
-                    size="md"
-                    className="w-full"
-                  >
-                    Add to Cart
-                  </Button>
-                </div>
-              </motion.div>
-            ))}
+          {/* Combination Recommendation */}
+          <div className="bg-white bg-opacity-20 rounded-2xl p-8 text-center">
+            <h3 className="text-2xl font-serif font-bold text-skincare-accent mb-4">
+              💡 Recommended Combinations
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-white bg-opacity-30 rounded-xl p-6">
+                <h4 className="font-bold text-skincare-accent mb-2">Skin Care Starter</h4>
+                <p className="text-sm text-skincare-accent opacity-80 mb-3">Pure Emu Oil 100ml + Balm 50g</p>
+                <p className="text-lg font-bold text-skincare-primary">Save $8.50</p>
+              </div>
+              <div className="bg-white bg-opacity-30 rounded-xl p-6">
+                <h4 className="font-bold text-skincare-accent mb-2">Pain Relief Combo</h4>
+                <p className="text-sm text-skincare-accent opacity-80 mb-3">Liniment + Capsules</p>
+                <p className="text-lg font-bold text-skincare-primary">Save $12.00</p>
+              </div>
+              <div className="bg-white bg-opacity-30 rounded-xl p-6">
+                <h4 className="font-bold text-skincare-accent mb-2">Complete Healing</h4>
+                <p className="text-sm text-skincare-accent opacity-80 mb-3">Oil 250ml + Liniment + Capsules</p>
+                <p className="text-lg font-bold text-skincare-primary">Save $25.00</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -397,11 +509,11 @@ export default function SkinCareLanding() {
             >
               <h2 className="text-4xl font-serif font-bold text-gray-800 mb-6">
                 Get Your Free 
-                <span className="text-gradient-skincare">Skin Care Guide</span>
+                <span className="text-gradient-skincare">Complete Healing Guide</span>
               </h2>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Download our comprehensive guide on natural skin care and get 15% off your first order. 
-                Learn the secrets to healthier skin that thousands have already discovered.
+                Download our comprehensive guide on natural healing with emu oil and get 15% off your first order. 
+                Learn the secrets to healthier skin AND pain-free living that thousands have already discovered.
               </p>
               
               <div className="space-y-4">
@@ -415,13 +527,19 @@ export default function SkinCareLanding() {
                   <div className="w-8 h-8 bg-skincare-primary rounded-full flex items-center justify-center">
                     <span className="text-white text-sm">✓</span>
                   </div>
-                  <span className="text-gray-700">Natural ingredients to avoid</span>
+                  <span className="text-gray-700">Natural pain relief techniques</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <div className="w-8 h-8 bg-skincare-primary rounded-full flex items-center justify-center">
                     <span className="text-white text-sm">✓</span>
                   </div>
-                  <span className="text-gray-700">Daily skincare routine template</span>
+                  <span className="text-gray-700">Complete daily healing routine</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-skincare-primary rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <span className="text-gray-700">Product combination guide</span>
                 </div>
               </div>
             </motion.div>
@@ -433,10 +551,10 @@ export default function SkinCareLanding() {
             >
               <LeadCaptureForm
                 theme="skincare"
-                title="Get Your Free Skin Care Guide"
-                subtitle="Join 50,000+ people who've transformed their skin naturally"
+                title="Get Your Free Complete Healing Guide"
+                subtitle="Join 50,000+ people who've transformed their health naturally"
                 offerText="15% OFF + Free Shipping"
-                ctaText="Get My Free Guide Now"
+                ctaText="Get My Free Healing Guide Now"
               />
             </motion.div>
           </div>
