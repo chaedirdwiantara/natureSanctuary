@@ -317,18 +317,8 @@ export default function PainReliefLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`relative bg-white rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 ${
-                  product.popular ? 'border-painrelief-primary ring-4 ring-painrelief-primary/20' : 'border-gray-100'
-                }`}
+                className="relative bg-white rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-gray-100"
               >
-                {product.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <div className="bg-painrelief-primary text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                      Most Popular
-                    </div>
-                  </div>
-                )}
-
                 {product.savings && (
                   <div className="absolute -top-2 -right-2">
                     <div className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
@@ -369,15 +359,6 @@ export default function PainReliefLanding() {
                       Save ${(product.price * 0.15).toFixed(2)} (15% OFF)
                     </p>
                   </div>
-
-                  <Button
-                    variant="primary"
-                    theme="painrelief"
-                    size="lg"
-                    className="w-full shadow-glow-orange"
-                  >
-                    Order for Clinic
-                  </Button>
                 </div>
               </motion.div>
             ))}

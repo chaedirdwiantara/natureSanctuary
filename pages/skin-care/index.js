@@ -488,32 +488,8 @@ export default function SkinCareLanding() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`product-card relative ${product.popular ? 'ring-2 ring-skincare-primary' : ''}`}
+                  className="product-card relative"
                 >
-                  {product.popular && (
-                    <div 
-                      className="absolute left-1/2 transform -translate-x-1/2" 
-                      style={{ 
-                        top: '-8px', 
-                        zIndex: 20 
-                      }}
-                    >
-                      <span 
-                        className="bg-skincare-primary text-white rounded-full font-bold border-2 border-white"
-                        style={{ 
-                          padding: '8px 16px',
-                          fontSize: '12px',
-                          fontWeight: '700',
-                          whiteSpace: 'nowrap',
-                          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-                          display: 'inline-block'
-                        }}
-                      >
-                        Most Popular
-                      </span>
-                    </div>
-                  )}
-
                   <div className="p-6">
                     <div className="relative w-24 h-24 mx-auto mb-4">
                       <Image
@@ -541,7 +517,7 @@ export default function SkinCareLanding() {
                       {product.bestFor}
                     </p>
 
-                    <ul className="space-y-1 mb-4">
+                    <ul className="space-y-1">
                       {product.features.map((feature, idx) => (
                         <li key={idx} className="flex items-center text-xs text-gray-600">
                           <span className="text-skincare-primary mr-2">✓</span>
@@ -549,15 +525,6 @@ export default function SkinCareLanding() {
                         </li>
                       ))}
                     </ul>
-
-                    <Button
-                      variant="primary"
-                      theme="skincare"
-                      size="sm"
-                      className="w-full"
-                    >
-                      Add to Cart
-                    </Button>
                   </div>
                 </motion.div>
               ))}
@@ -576,32 +543,8 @@ export default function SkinCareLanding() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`product-card relative ${product.popular ? 'ring-2 ring-skincare-primary' : ''}`}
+                  className="product-card relative"
                 >
-                  {product.popular && (
-                    <div 
-                      className="absolute left-1/2 transform -translate-x-1/2" 
-                      style={{ 
-                        top: '-8px', 
-                        zIndex: 20 
-                      }}
-                    >
-                      <span 
-                        className="bg-skincare-primary text-white rounded-full font-bold border-2 border-white"
-                        style={{ 
-                          padding: '8px 16px',
-                          fontSize: '12px',
-                          fontWeight: '700',
-                          whiteSpace: 'nowrap',
-                          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-                          display: 'inline-block'
-                        }}
-                      >
-                        Most Popular
-                      </span>
-                    </div>
-                  )}
-
                   <div className="p-6">
                     <div className="relative w-24 h-24 mx-auto mb-4">
                       <Image
@@ -629,7 +572,7 @@ export default function SkinCareLanding() {
                       {product.bestFor}
                     </p>
 
-                    <ul className="space-y-1 mb-4">
+                    <ul className="space-y-1">
                       {product.features.map((feature, idx) => (
                         <li key={idx} className="flex items-center text-xs text-gray-600">
                           <span className="text-skincare-primary mr-2">✓</span>
@@ -637,15 +580,6 @@ export default function SkinCareLanding() {
                         </li>
                       ))}
                     </ul>
-
-                    <Button
-                      variant="primary"
-                      theme="skincare"
-                      size="sm"
-                      className="w-full"
-                    >
-                      Add to Cart
-                    </Button>
                   </div>
                 </motion.div>
               ))}
@@ -679,7 +613,7 @@ export default function SkinCareLanding() {
       </section>
 
       {/* Lead Capture Section */}
-      <section className="section-padding bg-white">
+      <section id="contact" className="section-padding bg-white">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -692,7 +626,7 @@ export default function SkinCareLanding() {
                 <span className="text-gradient-skincare">Complete Healing Guide</span>
               </h2>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Download our comprehensive guide on natural healing with emu oil and get 15% off your first order. 
+                Download our comprehensive guide on natural healing with emu oil and get 10% off your first order. 
                 Learn the secrets to healthier skin AND pain-free living that thousands have already discovered.
               </p>
               
@@ -733,7 +667,7 @@ export default function SkinCareLanding() {
                 theme="skincare"
                 title="Get Your Free Complete Healing Guide"
                 subtitle="Join 50,000+ people who've transformed their health naturally"
-                offerText="15% OFF + Free Shipping"
+                offerText="10% OFF + Free Shipping"
                 ctaText="Get My Free Healing Guide Now"
               />
             </motion.div>
