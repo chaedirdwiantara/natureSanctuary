@@ -39,6 +39,7 @@ export default function Home() {
         title: 'Emu Oil Naturally - Premium Australian Emu Oil Products',
         description: 'Premium Australian emu oil for natural health, skincare, and pain relief. 100% natural, ethically sourced, pharmaceutical grade quality.'
       }}
+      hideNavigation={true}
     >
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-brand-cream to-white py-20">

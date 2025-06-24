@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
 
-export default function Layout({ children, theme = 'default', meta, className = '' }) {
+export default function Layout({ children, theme = 'default', meta, className = '', hideNavigation = false }) {
   useEffect(() => {
     // Apply theme class to body
     if (theme !== 'default') {
@@ -57,7 +57,7 @@ export default function Layout({ children, theme = 'default', meta, className = 
       </Head>
 
       <div className={`min-h-screen flex flex-col ${className}`}>
-        <Header theme={theme} />
+        <Header theme={theme} hideNavigation={hideNavigation} />
         
         <main className="flex-grow">
           {children}

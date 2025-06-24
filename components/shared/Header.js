@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FiMenu, FiX, FiPhone } from 'react-icons/fi';
 import { sharedContent } from '../../lib/content';
 
-export default function Header({ theme = 'default' }) {
+export default function Header({ theme = 'default', hideNavigation = false }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const getThemeColors = () => {
@@ -105,50 +105,56 @@ export default function Header({ theme = 'default' }) {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {navigationItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => handleScrollTo(item.href)}
-                className={`${colors.text} ${colors.textHover} transition-colors duration-300 font-medium cursor-pointer`}
-              >
-                {item.name}
-              </button>
-            ))}
-          </nav>
+          {!hideNavigation && (
+            <nav className="hidden lg:flex items-center space-x-8">
+              {navigationItems.map((item) => (
+                <button
+                  key={item.name}
+                  onClick={() => handleScrollTo(item.href)}
+                  className={`${colors.text} ${colors.textHover} transition-colors duration-300 font-medium cursor-pointer`}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </nav>
+          )}
 
           {/* Contact & CTA */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a
-              href={`tel:${sharedContent.contact.phone}`}
-              className={`flex items-center space-x-2 ${colors.text} ${colors.textHover} transition-colors duration-300`}
-            >
-              <FiPhone className="w-4 h-4" />
-              <span className="font-medium">{sharedContent.contact.phone}</span>
-            </a>
-            
-            <button
-              onClick={() => handleScrollTo('#products')}
-              className={`${colors.button} px-6 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 cursor-pointer`}
-            >
-              Get Quote
-            </button>
-          </div>
+          {!hideNavigation && (
+            <div className="hidden md:flex items-center space-x-4">
+              <a
+                href={`tel:${sharedContent.contact.phone}`}
+                className={`flex items-center space-x-2 ${colors.text} ${colors.textHover} transition-colors duration-300`}
+              >
+                <FiPhone className="w-4 h-4" />
+                <span className="font-medium">{sharedContent.contact.phone}</span>
+              </a>
+              
+              <button
+                onClick={() => handleScrollTo('#products')}
+                className={`${colors.button} px-6 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 cursor-pointer`}
+              >
+                Get Quote
+              </button>
+            </div>
+          )}
 
           {/* Mobile Menu Button */}
-          <button
-            type="button"
-            className={`lg:hidden ${colors.text} p-2 z-60 relative`}
-            onClick={toggleMobileMenu}
-            aria-label="Toggle mobile menu"
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
-          </button>
+          {!hideNavigation && (
+            <button
+              type="button"
+              className={`lg:hidden ${colors.text} p-2 z-60 relative`}
+              onClick={toggleMobileMenu}
+              aria-label="Toggle mobile menu"
+              aria-expanded={isMenuOpen}
+            >
+              {isMenuOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
+            </button>
+          )}
         </div>
 
         {/* Mobile Menu - Simplified without Framer Motion */}
-        {isMenuOpen && (
+        {!hideNavigation && isMenuOpen && (
           <div className={`lg:hidden border-t border-gray-200 ${colors.bg} overflow-hidden transition-all duration-300 ease-in-out`}>
             <div className="py-4 space-y-4">
               {navigationItems.map((item) => (
