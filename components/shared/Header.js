@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiPhone } from 'react-icons/fi';
 import { sharedContent } from '../../lib/content';
 
@@ -14,28 +13,32 @@ export default function Header({ theme = 'default' }) {
         return {
           bg: 'bg-skincare-bg',
           text: 'text-skincare-accent',
-          button: 'btn-skincare',
+          textHover: 'hover:text-skincare-primary',
+          button: 'bg-skincare-primary hover:bg-skincare-accent text-white',
           accent: 'text-skincare-primary'
         };
       case 'painrelief':
         return {
           bg: 'bg-painrelief-bg',
           text: 'text-painrelief-accent',
-          button: 'btn-painrelief',
+          textHover: 'hover:text-painrelief-primary',
+          button: 'bg-painrelief-primary hover:bg-painrelief-accent text-white',
           accent: 'text-painrelief-primary'
         };
       case 'wholesale':
         return {
           bg: 'bg-wholesale-bg',
           text: 'text-wholesale-accent',
-          button: 'btn-wholesale',
+          textHover: 'hover:text-wholesale-primary',
+          button: 'bg-wholesale-primary hover:bg-wholesale-accent text-white',
           accent: 'text-wholesale-primary'
         };
       default:
         return {
           bg: 'bg-white',
           text: 'text-gray-800',
-          button: 'bg-brand-gold text-white',
+          textHover: 'hover:text-brand-gold',
+          button: 'bg-brand-gold text-white hover:bg-yellow-600',
           accent: 'text-brand-gold'
         };
     }
@@ -51,22 +54,30 @@ export default function Header({ theme = 'default' }) {
   ];
 
   // Smooth scroll function
-  const handleScrollTo = (href, event) => {
-    event.preventDefault();
+  const handleScrollTo = (href) => {
+    // Close mobile menu first
     setIsMenuOpen(false);
     
-    if (href.startsWith('#')) {
-      const element = document.querySelector(href);
-      if (element) {
-        const headerHeight = 80; // Height of sticky header
-        const elementPosition = element.offsetTop - headerHeight;
-        
-        window.scrollTo({
-          top: elementPosition,
-          behavior: 'smooth'
-        });
+    // Wait a bit for menu to close, then scroll
+    setTimeout(() => {
+      if (href.startsWith('#')) {
+        const element = document.querySelector(href);
+        if (element) {
+          const headerHeight = 80;
+          const elementPosition = element.offsetTop - headerHeight;
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
       }
-    }
+    }, 100);
+  };
+
+  // Toggle mobile menu
+  const toggleMobileMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -96,14 +107,13 @@ export default function Header({ theme = 'default' }) {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             {navigationItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                onClick={(e) => handleScrollTo(item.href, e)}
-                className={`${colors.text} hover:${colors.accent} transition-colors duration-300 font-medium cursor-pointer`}
+                onClick={() => handleScrollTo(item.href)}
+                className={`${colors.text} ${colors.textHover} transition-colors duration-300 font-medium cursor-pointer`}
               >
                 {item.name}
-              </a>
+              </button>
             ))}
           </nav>
 
@@ -111,73 +121,67 @@ export default function Header({ theme = 'default' }) {
           <div className="hidden md:flex items-center space-x-4">
             <a
               href={`tel:${sharedContent.contact.phone}`}
-              className={`flex items-center space-x-2 ${colors.text} hover:${colors.accent} transition-colors duration-300`}
+              className={`flex items-center space-x-2 ${colors.text} ${colors.textHover} transition-colors duration-300`}
             >
               <FiPhone className="w-4 h-4" />
               <span className="font-medium">{sharedContent.contact.phone}</span>
             </a>
             
-            <a
-              href="#products"
-              onClick={(e) => handleScrollTo('#products', e)}
+            <button
+              onClick={() => handleScrollTo('#products')}
               className={`${colors.button} px-6 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 cursor-pointer`}
             >
               Get Quote
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className={`lg:hidden ${colors.text} p-2`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            type="button"
+            className={`lg:hidden ${colors.text} p-2 z-60 relative`}
+            onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+            aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className={`lg:hidden border-t border-gray-200 ${colors.bg}`}
-            >
-              <div className="py-4 space-y-4">
-                {navigationItems.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    onClick={(e) => handleScrollTo(item.href, e)}
-                    className={`block ${colors.text} hover:${colors.accent} transition-colors duration-300 font-medium py-2 cursor-pointer`}
-                  >
-                    {item.name}
-                  </a>
-                ))}
+        {/* Mobile Menu - Simplified without Framer Motion */}
+        {isMenuOpen && (
+          <div className={`lg:hidden border-t border-gray-200 ${colors.bg} overflow-hidden transition-all duration-300 ease-in-out`}>
+            <div className="py-4 space-y-4">
+              {navigationItems.map((item) => (
+                <button
+                  key={item.name}
+                  type="button"
+                  onClick={() => handleScrollTo(item.href)}
+                  className={`block w-full text-left px-0 py-3 ${colors.text} ${colors.textHover} transition-colors duration-300 font-medium cursor-pointer border-0 bg-transparent`}
+                >
+                  {item.name}
+                </button>
+              ))}
+              
+              <div className="pt-4 border-t border-gray-200">
+                <a
+                  href={`tel:${sharedContent.contact.phone}`}
+                  className={`flex items-center space-x-2 ${colors.text} py-2`}
+                >
+                  <FiPhone className="w-4 h-4" />
+                  <span>{sharedContent.contact.phone}</span>
+                </a>
                 
-                <div className="pt-4 border-t border-gray-200">
-                  <a
-                    href={`tel:${sharedContent.contact.phone}`}
-                    className={`flex items-center space-x-2 ${colors.text} py-2`}
-                  >
-                    <FiPhone className="w-4 h-4" />
-                    <span>{sharedContent.contact.phone}</span>
-                  </a>
-                  
-                  <a
-                    href="#products"
-                    onClick={(e) => handleScrollTo('#products', e)}
-                    className={`${colors.button} inline-block px-6 py-2 rounded-lg font-semibold mt-2 cursor-pointer`}
-                  >
-                    Get Quote
-                  </a>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => handleScrollTo('#products')}
+                  className={`${colors.button} px-6 py-2 rounded-lg font-semibold mt-2 cursor-pointer transition-all duration-300`}
+                >
+                  Get Quote
+                </button>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

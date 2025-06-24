@@ -12,6 +12,7 @@ import { landingPageContent } from '../../lib/content';
 export default function WholesaleLanding() {
   const content = landingPageContent.wholesale;
 
+  // Carousel images - only from hero folder
   const carouselImages = [
     {
       src: '/images/hero/wholesale-hero.jpg',
@@ -19,14 +20,14 @@ export default function WholesaleLanding() {
       title: 'Wholesale Partnership'
     },
     {
-      src: '/images/lifestyle/business-handshake.jpg', 
-      alt: 'Business partnership handshake',
-      title: 'Business Partnership'
+      src: '/images/hero/skincare-hero.jpg', 
+      alt: 'Premium skincare products',
+      title: 'Premium Products'
     },
     {
-      src: '/images/lifestyle/australian-farm.jpg',
-      alt: 'Australian emu farm',
-      title: 'Australian Quality'
+      src: '/images/hero/painrelief-hero.jpg',
+      alt: 'Professional pain relief solutions',
+      title: 'Professional Solutions'
     }
   ];
 
@@ -74,7 +75,7 @@ export default function WholesaleLanding() {
                 className="inline-block mb-4 md:mb-6"
               >
                 <div className="bg-wholesale-primary text-white px-4 md:px-6 py-2 md:py-3 rounded-full shadow-glow-blue">
-                  <span className="font-bold text-sm md:text-lg">🤝 {content.hero.discount} {content.hero.discountText}</span>
+                  <span className="font-bold text-sm md:text-lg">🤝 20% OFF + Free Samples</span>
                 </div>
               </motion.div>
 
@@ -106,7 +107,7 @@ export default function WholesaleLanding() {
                   variant="primary"
                   theme="wholesale"
                   size="lg"
-                  href="#products"
+                  onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
                   className="shadow-glow-blue w-full sm:w-auto"
                 >
                   {content.hero.cta} →
@@ -115,7 +116,7 @@ export default function WholesaleLanding() {
                   variant="secondary"
                   theme="wholesale"
                   size="lg"
-                  href="#testimonials"
+                  onClick={() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' })}
                   className="w-full sm:w-auto"
                 >
                   Partner Success Stories
@@ -212,7 +213,7 @@ export default function WholesaleLanding() {
         </div>
       </section>
 
-      <section ref={benefitsRef} className="py-16 md:py-20 bg-white">
+      <section ref={benefitsRef} className="py-16 md:py-20 bg-gray-50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -224,7 +225,7 @@ export default function WholesaleLanding() {
               Why Partner With Us?
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Join Australia's most trusted emu oil supplier and grow your business with premium, proven products
+              Join Australia's most trusted emu oil wholesale network and grow your business with premium products
             </p>
           </motion.div>
 
@@ -249,7 +250,7 @@ export default function WholesaleLanding() {
         </div>
       </section>
 
-      <section ref={productsRef} id="products" className="py-16 md:py-20 bg-wholesale-light">
+      <section ref={productsRef} id="products" className="py-16 md:py-20 bg-white">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -261,41 +262,68 @@ export default function WholesaleLanding() {
               Wholesale Product Range & Pricing
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Competitive wholesale pricing with excellent margins for your business
+              Premium Australian emu oil products with competitive wholesale pricing and excellent margins
             </p>
           </motion.div>
 
-          <div className="space-y-8">
-            {content.products.map((category, categoryIndex) => (
-              <motion.div
-                key={categoryIndex}
-                initial={{ opacity: 0, y: 30 }}
-                animate={productsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-                className="bg-white rounded-2xl p-6 md:p-8 shadow-xl"
-              >
-                <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">{category.category}</h3>
-                
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {category.items.map((item, itemIndex) => (
-                    <div key={itemIndex} className="bg-gray-50 rounded-lg p-6 text-center">
-                      <h4 className="text-lg font-bold text-gray-900 mb-2">{item.size}</h4>
-                      <p className="text-sm text-gray-600 mb-3">Min Order: {item.minOrder} units</p>
-                      <div className="text-2xl font-bold text-wholesale-primary mb-2">
-                        ${item.wholesalePrice}
+          <div className="space-y-12">
+            {content.products.map((category, categoryIndex) => {
+              // Map category to product image
+              const getProductImage = (category, size) => {
+                if (category === "Pure Emu Oil") {
+                  if (size === "50ml") return "/images/products/pure-emu-oil-50ml.png";
+                  if (size === "100ml") return "/images/products/pure-emu-oil-100ml.png";
+                  if (size === "250ml") return "/images/products/pure-emu-oil-250ml.png";
+                }
+                if (category === "Emu Oil Balm") {
+                  return "/images/products/emu-oil-balm-50g.png";
+                }
+                if (category === "Emu Oil Liniment") {
+                  return "/images/products/emu-oil-liniment-100ml.png";
+                }
+                return "/images/products/pure-emu-oil-100ml.png"; // fallback
+              };
+
+              return (
+                <motion.div
+                  key={categoryIndex}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={productsInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: categoryIndex * 0.2 }}
+                  className="bg-wholesale-light rounded-2xl p-6 md:p-8"
+                >
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">{category.category}</h3>
+                  
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {category.items.map((item, itemIndex) => (
+                      <div key={itemIndex} className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div className="mb-4">
+                          <Image
+                            src={getProductImage(category.category, item.size)}
+                            alt={`${category.category} ${item.size}`}
+                            width={120}
+                            height={120}
+                            className="w-20 h-20 md:w-24 md:h-24 object-contain mx-auto"
+                          />
+                        </div>
+                        <h4 className="text-lg font-bold text-gray-900 mb-2">{item.size}</h4>
+                        <p className="text-sm text-gray-600 mb-3">Min Order: {item.minOrder} units</p>
+                        <div className="text-2xl font-bold text-wholesale-primary mb-2">
+                          ${item.wholesalePrice}
+                        </div>
+                        <p className="text-xs text-gray-500">per unit (ex GST)</p>
+                        <div className="mt-4 text-sm text-gray-600">
+                          <p>Retail RRP: ${(item.wholesalePrice * 2.5).toFixed(2)}</p>
+                          <p className="text-wholesale-primary font-semibold">
+                            Your margin: {Math.round(((2.5 - 1) / 2.5) * 100)}%
+                          </p>
+                        </div>
                       </div>
-                      <p className="text-xs text-gray-500">per unit (ex GST)</p>
-                      <div className="mt-4 text-sm text-gray-600">
-                        <p>Retail RRP: ${(item.wholesalePrice * 2.5).toFixed(2)}</p>
-                        <p className="text-wholesale-primary font-semibold">
-                          Your margin: {Math.round(((2.5 - 1) / 2.5) * 100)}%
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
           <motion.div
@@ -454,6 +482,7 @@ export default function WholesaleLanding() {
                 variant="primary"
                 theme="wholesale"
                 size="lg"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="shadow-glow-blue"
               >
                 Request Wholesale Application
@@ -463,13 +492,116 @@ export default function WholesaleLanding() {
         </div>
       </section>
 
-      <LeadCaptureForm 
-        theme="wholesale"
-        title="Get Your Wholesale Catalog"
-        description="Request our complete wholesale catalog with pricing, product specs, and partnership details."
-        buttonText="Get Wholesale Catalog"
-        placeholder="Enter your business email..."
-      />
+      {/* Enhanced Contact Form */}
+      <section id="contact" className="py-16 md:py-20 bg-gradient-to-br from-wholesale-primary to-wholesale-accent">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl p-8 md:p-12 shadow-2xl"
+            >
+              <div className="text-center mb-8">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Get Your Wholesale Catalog
+                </h2>
+                <p className="text-xl text-gray-700 mb-2">
+                  Request our complete wholesale catalog with pricing, product specs, and partnership details
+                </p>
+                <div className="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
+                  20% OFF + Free Samples
+                </div>
+              </div>
+
+              <form className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="text-gray-400">👤</span>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Enter your full name"
+                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-wholesale-primary focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Business Email *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="text-gray-400">📧</span>
+                      </div>
+                      <input
+                        type="email"
+                        placeholder="Enter your business email"
+                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-wholesale-primary focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Business Name *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="text-gray-400">🏢</span>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Enter your business name"
+                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-wholesale-primary focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Phone Number (Optional)
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="text-gray-400">📞</span>
+                      </div>
+                      <input
+                        type="tel"
+                        placeholder="Enter your phone number"
+                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-wholesale-primary focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <Button
+                  variant="primary"
+                  theme="wholesale"
+                  size="lg"
+                  className="w-full shadow-glow-blue text-lg py-4"
+                >
+                  Get Wholesale Catalog
+                </Button>
+
+                <div className="text-center text-sm text-gray-600">
+                  <p>We respect your privacy. Unsubscribe at any time.</p>
+                  <p>By submitting, you agree to our <span className="text-wholesale-primary">Privacy Policy</span>.</p>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 }
