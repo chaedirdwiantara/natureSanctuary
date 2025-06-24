@@ -24,8 +24,8 @@ export default function LeadCaptureForm({
     setSubmitError('');
     
     try {
-      // 1. Email ke admin (notification)
-      const adminTemplateParams = {
+      // EmailJS configuration (ORIGINAL WORKING VERSION)
+      const templateParams = {
         to_name: 'Emu Oil Naturally Team',
         from_name: data.name,
         from_email: data.email,
@@ -37,41 +37,20 @@ export default function LeadCaptureForm({
         reply_to: data.email
       };
 
-      // 2. Email ke client (auto-reply)
-      const clientTemplateParams = {
-        from_name: data.name,
-        from_email: data.email,
-        guide_type: theme === 'skincare' ? 'Complete Healing' : 
-                   theme === 'painrelief' ? 'Professional Pain Relief' : 
-                   'Wholesale Catalog',
-        offer_text: theme === 'skincare' ? '10% OFF + Free Shipping' :
-                   theme === 'painrelief' ? '15% OFF + Free Shipping' :
-                   '20% OFF + Free Samples',
-        discount_code: theme === 'skincare' ? 'NATURAL10' :
-                      theme === 'painrelief' ? 'RELIEF15' :
-                      'WHOLESALE20',
-        landing_page: theme
-      };
+      console.log('Sending original working email with params:', templateParams);
 
-      // Kirim email admin
-      const adminResult = await emailjs.send(
+      // Send email using EmailJS (ORIGINAL METHOD)
+      const result = await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-        adminTemplateParams,
+        templateParams,
         process.env.NEXT_PUBLIC_EMAILJS_USER_ID
       );
 
-      // Kirim email client auto-reply
-      if (process.env.NEXT_PUBLIC_EMAILJS_CLIENT_TEMPLATE_ID) {
-        await emailjs.send(
-          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-          process.env.NEXT_PUBLIC_EMAILJS_CLIENT_TEMPLATE_ID,
-          clientTemplateParams,
-          process.env.NEXT_PUBLIC_EMAILJS_USER_ID
-        );
-      }
+      console.log('Email sent successfully:', result);
+      
+      // Auto-reply akan dikirim otomatis oleh EmailJS jika diaktifkan di dashboard
 
-      console.log('Emails sent successfully:', adminResult);
       setIsSubmitted(true);
       reset();
       
