@@ -25,8 +25,8 @@ export default function CustomLeadForm({
     setSubmitError('');
     
     try {
-      // EmailJS configuration
-      const templateParams = {
+      // 1. Email ke admin (notification)
+      const adminTemplateParams = {
         to_name: 'Emu Oil Naturally Team',
         from_name: data.name || data.fullName,
         from_email: data.email,
@@ -41,16 +41,41 @@ export default function CustomLeadForm({
         form_data: JSON.stringify(data, null, 2)
       };
 
-      // Send email using EmailJS
-      // EmailJS credentials from environment variables
-      const result = await emailjs.send(
+      // 2. Email ke client (auto-reply)
+      const clientTemplateParams = {
+        from_name: data.name || data.fullName,
+        from_email: data.email,
+        guide_type: theme === 'skincare' ? 'Complete Healing' : 
+                   theme === 'painrelief' ? 'Professional Pain Relief' : 
+                   'Wholesale Catalog',
+        offer_text: theme === 'skincare' ? '10% OFF + Free Shipping' :
+                   theme === 'painrelief' ? '15% OFF + Free Shipping' :
+                   '20% OFF + Free Samples',
+        discount_code: theme === 'skincare' ? 'NATURAL10' :
+                      theme === 'painrelief' ? 'RELIEF15' :
+                      'WHOLESALE20',
+        landing_page: theme
+      };
+
+      // Kirim email admin
+      const adminResult = await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-        templateParams,
+        adminTemplateParams,
         process.env.NEXT_PUBLIC_EMAILJS_USER_ID
       );
 
-      console.log('Email sent successfully:', result);
+      // Kirim email client auto-reply
+      if (process.env.NEXT_PUBLIC_EMAILJS_CLIENT_TEMPLATE_ID) {
+        await emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_CLIENT_TEMPLATE_ID,
+          clientTemplateParams,
+          process.env.NEXT_PUBLIC_EMAILJS_USER_ID
+        );
+      }
+
+      console.log('Emails sent successfully:', adminResult);
       setIsSubmitted(true);
       reset();
       

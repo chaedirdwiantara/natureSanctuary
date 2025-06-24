@@ -24,8 +24,8 @@ export default function LeadCaptureForm({
     setSubmitError('');
     
     try {
-      // EmailJS configuration
-      const templateParams = {
+      // 1. Email ke admin (notification)
+      const adminTemplateParams = {
         to_name: 'Emu Oil Naturally Team',
         from_name: data.name,
         from_email: data.email,
@@ -37,16 +37,41 @@ export default function LeadCaptureForm({
         reply_to: data.email
       };
 
-      // Send email using EmailJS
-      // EmailJS credentials from environment variables
-      const result = await emailjs.send(
+      // 2. Email ke client (auto-reply)
+      const clientTemplateParams = {
+        from_name: data.name,
+        from_email: data.email,
+        guide_type: theme === 'skincare' ? 'Complete Healing' : 
+                   theme === 'painrelief' ? 'Professional Pain Relief' : 
+                   'Wholesale Catalog',
+        offer_text: theme === 'skincare' ? '10% OFF + Free Shipping' :
+                   theme === 'painrelief' ? '15% OFF + Free Shipping' :
+                   '20% OFF + Free Samples',
+        discount_code: theme === 'skincare' ? 'NATURAL10' :
+                      theme === 'painrelief' ? 'RELIEF15' :
+                      'WHOLESALE20',
+        landing_page: theme
+      };
+
+      // Kirim email admin
+      const adminResult = await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-        templateParams,
+        adminTemplateParams,
         process.env.NEXT_PUBLIC_EMAILJS_USER_ID
       );
 
-      console.log('Email sent successfully:', result);
+      // Kirim email client auto-reply
+      if (process.env.NEXT_PUBLIC_EMAILJS_CLIENT_TEMPLATE_ID) {
+        await emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_CLIENT_TEMPLATE_ID,
+          clientTemplateParams,
+          process.env.NEXT_PUBLIC_EMAILJS_USER_ID
+        );
+      }
+
+      console.log('Emails sent successfully:', adminResult);
       setIsSubmitted(true);
       reset();
       
@@ -107,6 +132,10 @@ export default function LeadCaptureForm({
   const colors = getThemeColors();
 
   if (isSubmitted) {
+    const discountCode = theme === 'skincare' ? 'NATURAL10' :
+                        theme === 'painrelief' ? 'RELIEF15' :
+                        theme === 'wholesale' ? 'WHOLESALE20' : 'NATURAL15';
+
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
@@ -123,7 +152,7 @@ export default function LeadCaptureForm({
           Check your email for your discount code and free guide.
         </p>
         <p className={`text-sm ${colors.accent} font-medium`}>
-          🎉 Your discount code: NATURAL15
+          🎉 Your discount code: {discountCode}
         </p>
       </motion.div>
     );
