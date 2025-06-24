@@ -8,6 +8,41 @@ This directory contains all the images for the landing pages.
 - /pain-relief/ - Pain relief landing page images
 - /wholesale/ - Wholesale landing page images
 - /trust/ - Trust badges and certificates
-- /products/ - Product images
+- /products/ - Product images (you upload your product photos here)
+- /hero/ - Hero section images (you upload hero images here)
+- /lifestyle/ - Lifestyle and usage images (you upload lifestyle photos here)
+- /testimonials/ - Customer testimonial photos (using placeholder service)
+- /results/ - Before/after images (optional)
+- /icons/ - Individual icon files (not needed - using React Icons library)
 
-For now, the project uses placeholder images from Unsplash and placeholder services. 
+## Customer Testimonials - Using Placeholder Service:
+Since you don't have customer photos, we're using professional placeholder portraits:
+
+### Skin Care Testimonials:
+- Sarah (Young woman): https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=faces
+- Mike (Middle-aged man): https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces  
+- Jenny (Woman in 40s): https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=faces
+
+### Pain Relief Testimonials:
+- John (Athletic man): https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=faces
+- Mary (Senior woman): https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=150&h=150&fit=crop&crop=faces
+- David (Professional): https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=faces
+
+### Wholesale Testimonials:
+- Robert (Pharmacy owner): https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150&h=150&fit=crop&crop=faces
+- Lisa (Spa director): https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=faces
+- Mark (Distributor): https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=faces
+
+## Icons:
+✅ All icons are now available through React Icons library in components/shared/Icons.js
+- No need to download individual icon files
+- 25+ icons ready to use for all landing pages
+- Consistent styling and theming
+
+## What You Need to Provide:
+1. Product photos (5 files) → save to /products/
+2. Hero images (3 files) → save to /hero/
+3. Lifestyle photos (4 files) → save to /lifestyle/
+4. Before/after results (optional) → save to /results/
+
+Total: 12-14 images needed from you. 

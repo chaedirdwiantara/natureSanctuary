@@ -44,13 +44,13 @@ export default function Footer({ theme = 'default' }) {
       {/* Trust Signals Bar */}
       <div className={`border-b ${colors.border} py-8`}>
         <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {sharedContent.trustSignals.map((signal, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {sharedContent.trust.badges.map((badge, index) => (
               <div key={index} className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-white bg-opacity-10 rounded-lg flex items-center justify-center">
                   <Image
-                    src={signal.icon}
-                    alt={signal.title}
+                    src={badge.image}
+                    alt={badge.name}
                     width={24}
                     height={24}
                     className="opacity-90"
@@ -58,10 +58,10 @@ export default function Footer({ theme = 'default' }) {
                 </div>
                 <div>
                   <h4 className={`font-semibold text-sm ${colors.text}`}>
-                    {signal.title}
+                    {badge.name}
                   </h4>
                   <p className={`text-xs ${colors.accent}`}>
-                    {signal.description}
+                    {badge.description}
                   </p>
                 </div>
               </div>
@@ -103,14 +103,14 @@ export default function Footer({ theme = 'default' }) {
               {/* Social Links */}
               <div className="flex space-x-4">
                 <a
-                  href={sharedContent.contact.social.facebook}
+                  href={sharedContent.contact.socialMedia.facebook}
                   className={`${colors.accent} hover:${colors.text} transition-colors duration-300`}
                   aria-label="Facebook"
                 >
                   <FiFacebook className="w-5 h-5" />
                 </a>
                 <a
-                  href={sharedContent.contact.social.instagram}
+                  href={sharedContent.contact.socialMedia.instagram}
                   className={`${colors.accent} hover:${colors.text} transition-colors duration-300`}
                   aria-label="Instagram"
                 >
@@ -178,7 +178,6 @@ export default function Footer({ theme = 'default' }) {
                 height={40}
                 className="opacity-80"
               />
-
             </div>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import Layout from '../../components/shared/Layout';
 import Button from '../../components/shared/Button';
 import LeadCaptureForm from '../../components/shared/LeadCaptureForm';
+import { Icons, FeatureIcons } from '../../components/shared/Icons';
 import { landingPageContent } from '../../lib/content';
 import { developmentImages } from '../../lib/imageRequirements';
 
