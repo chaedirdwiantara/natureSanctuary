@@ -12,7 +12,7 @@ import { landingPageContent } from '../../lib/content';
 export default function PainReliefLanding() {
   const content = landingPageContent.painRelief;
 
-  // Carousel images
+  // Carousel images - only muscle-hero and painrelief-hero
   const carouselImages = [
     {
       src: '/images/hero/painrelief-hero.jpg',
@@ -23,11 +23,6 @@ export default function PainReliefLanding() {
       src: '/images/hero/muscle-hero.jpg', 
       alt: 'Muscle pain relief solution',
       title: 'Muscle Relief'
-    },
-    {
-      src: '/images/lifestyle/athlete-using-oil.jpg',
-      alt: 'Athlete using emu oil for recovery',
-      title: 'Sports Recovery'
     }
   ];
 
@@ -84,7 +79,7 @@ export default function PainReliefLanding() {
                 className="inline-block mb-4 md:mb-6"
               >
                 <div className="bg-painrelief-primary text-white px-4 md:px-6 py-2 md:py-3 rounded-full shadow-glow-orange">
-                  <span className="font-bold text-sm md:text-lg">🔥 {content.hero.discount} {content.hero.discountText}</span>
+                  <span className="font-bold text-sm md:text-lg">🔥 15% OFF {content.hero.discountText}</span>
                 </div>
               </motion.div>
 
@@ -94,7 +89,7 @@ export default function PainReliefLanding() {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-painrelief-accent mb-4 md:mb-6 leading-tight"
               >
-                {content.hero.headline}
+                Professional-Grade Natural Pain Relief
               </motion.h1>
 
               <motion.p
@@ -103,7 +98,8 @@ export default function PainReliefLanding() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-lg md:text-xl text-painrelief-accent opacity-80 mb-6 md:mb-8 leading-relaxed"
               >
-                {content.hero.subheading}
+                Premium Australian emu oil for clinics, physiotherapy centers, and healthcare professionals. 
+                Fast-acting, non-steroidal relief your patients can trust.
               </motion.p>
 
               <motion.div
@@ -116,19 +112,19 @@ export default function PainReliefLanding() {
                   variant="primary"
                   theme="painrelief"
                   size="lg"
-                  href="#products"
+                  onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
                   className="shadow-glow-orange w-full sm:w-auto"
                 >
-                  {content.hero.cta} →
+                  View Professional Range →
                 </Button>
                 <Button
                   variant="secondary"
                   theme="painrelief"
                   size="lg"
-                  href="#testimonials"
+                  onClick={() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' })}
                   className="w-full sm:w-auto"
                 >
-                  Read Success Stories
+                  Clinical Results
                 </Button>
               </motion.div>
 
@@ -140,7 +136,7 @@ export default function PainReliefLanding() {
               >
                 <div className="flex items-center space-x-2">
                   <span className="text-painrelief-primary">✓</span>
-                  <span>30-Day Guarantee</span>
+                  <span>Clinical Grade</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-painrelief-primary">✓</span>
@@ -232,10 +228,10 @@ export default function PainReliefLanding() {
             className="text-center mb-12 md:mb-16"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
-              Are You Tired of Living With Pain?
+              Common Patient Pain Challenges
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Millions of Australians struggle with chronic pain that limits their quality of life
+              Help your patients overcome chronic pain that limits their quality of life and recovery
             </p>
           </motion.div>
 
@@ -267,10 +263,10 @@ export default function PainReliefLanding() {
             className="text-center mb-12 md:mb-16"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
-              The Natural Solution That Works
+              The Professional Solution That Works
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Australian emu oil provides fast-acting, long-lasting pain relief without harmful side effects
+              Australian emu oil provides fast-acting, long-lasting pain relief that healthcare professionals trust
             </p>
           </motion.div>
 
@@ -306,10 +302,10 @@ export default function PainReliefLanding() {
             className="text-center mb-12 md:mb-16"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
-              Choose Your Pain Relief Solution
+              Professional Pain Relief Range
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Professional-grade emu oil products designed for maximum pain relief and mobility
+              Clinical-grade emu oil products designed for healthcare professionals and their patients
             </p>
           </motion.div>
 
@@ -365,10 +361,12 @@ export default function PainReliefLanding() {
                   <div className="mb-6">
                     <div className="flex items-center justify-center space-x-3">
                       <span className="text-lg text-gray-500 line-through">${product.price}</span>
-                      <span className="text-2xl md:text-3xl font-bold text-painrelief-primary">${product.salePrice}</span>
+                      <span className="text-2xl md:text-3xl font-bold text-painrelief-primary">
+                        ${(product.price * 0.85).toFixed(2)}
+                      </span>
                     </div>
                     <p className="text-sm text-painrelief-primary font-semibold mt-1">
-                      Save ${(product.price - product.salePrice).toFixed(2)} (20% OFF)
+                      Save ${(product.price * 0.15).toFixed(2)} (15% OFF)
                     </p>
                   </div>
 
@@ -378,7 +376,7 @@ export default function PainReliefLanding() {
                     size="lg"
                     className="w-full shadow-glow-orange"
                   >
-                    Order Now - Free Shipping
+                    Order for Clinic
                   </Button>
                 </div>
               </motion.div>
@@ -393,22 +391,22 @@ export default function PainReliefLanding() {
             className="text-center mt-12"
           >
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg max-w-2xl mx-auto">
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Free Mobility Guide Included</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Professional Resources Included</h3>
               <p className="text-gray-700 mb-4">
-                Get our comprehensive "7-Day Pain-Free Living Guide" with every order - a $29 value, absolutely free!
+                Get our comprehensive "Healthcare Professional's Guide to Emu Oil" with every order - a $29 value, absolutely free!
               </p>
               <div className="flex justify-center items-center space-x-4 text-sm text-gray-600">
                 <span className="flex items-center space-x-1">
                   <span className="text-painrelief-primary">✓</span>
-                  <span>Exercise routines</span>
+                  <span>Clinical studies</span>
                 </span>
                 <span className="flex items-center space-x-1">
                   <span className="text-painrelief-primary">✓</span>
-                  <span>Lifestyle tips</span>
+                  <span>Application protocols</span>
                 </span>
                 <span className="flex items-center space-x-1">
                   <span className="text-painrelief-primary">✓</span>
-                  <span>Application guide</span>
+                  <span>Patient handouts</span>
                 </span>
               </div>
             </div>
@@ -426,10 +424,10 @@ export default function PainReliefLanding() {
             className="text-center mb-12 md:mb-16"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
-              Real Results From Real People
+              Trusted by Healthcare Professionals
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Join thousands of Australians who've found lasting pain relief with our emu oil
+              Join thousands of clinics and healthcare professionals who trust Australian emu oil for patient care
             </p>
           </motion.div>
 
@@ -478,77 +476,116 @@ export default function PainReliefLanding() {
         </div>
       </section>
 
-      {/* Guarantee Section */}
-      <section className="py-16 md:py-20 bg-painrelief-light">
+      {/* Enhanced Lead Capture Form */}
+      <section id="contact" className="py-16 md:py-20 bg-gradient-to-br from-painrelief-primary to-painrelief-accent">
         <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl max-w-4xl mx-auto">
-              <Image
-                src="/images/trust/money-back-guarantee.png"
-                alt="30-Day Money Back Guarantee"
-                width={100}
-                height={100}
-                className="w-20 h-20 mx-auto mb-6"
-              />
-              
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                30-Day Money-Back Guarantee
-              </h2>
-              
-              <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-                We're so confident you'll experience significant pain relief within 30 days that we offer a full money-back guarantee. 
-                If you're not completely satisfied, return the products for a full refund - no questions asked.
-              </p>
-
-              <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <div className="text-center">
-                  <div className="bg-painrelief-primary text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
-                    <span className="text-xl">✓</span>
-                  </div>
-                  <p className="font-semibold">Full Refund</p>
-                </div>
-                <div className="text-center">
-                  <div className="bg-painrelief-primary text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
-                    <span className="text-xl">✓</span>
-                  </div>
-                  <p className="font-semibold">No Questions Asked</p>
-                </div>
-                <div className="text-center">
-                  <div className="bg-painrelief-primary text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
-                    <span className="text-xl">✓</span>
-                  </div>
-                  <p className="font-semibold">Keep Free Guide</p>
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl p-8 md:p-12 shadow-2xl"
+            >
+              <div className="text-center mb-8">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Get Your Professional Pain Relief Guide
+                </h2>
+                <p className="text-xl text-gray-700 mb-2">
+                  Download our clinical guide plus get exclusive healthcare professional pricing
+                </p>
+                <div className="inline-block bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold">
+                  15% OFF + Free Shipping
                 </div>
               </div>
 
-              <Button
-                variant="primary"
-                theme="painrelief"
-                size="lg"
-                href="#products"
-                className="shadow-glow-orange"
-              >
-                Try Risk-Free Today
-              </Button>
-            </div>
-          </motion.div>
+              <form className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="text-gray-400">👤</span>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Enter your full name"
+                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-painrelief-primary focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Professional Email *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="text-gray-400">📧</span>
+                      </div>
+                      <input
+                        type="email"
+                        placeholder="Enter your professional email"
+                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-painrelief-primary focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Clinic/Practice Name *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="text-gray-400">🏥</span>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Enter clinic or practice name"
+                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-painrelief-primary focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Phone Number (Optional)
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="text-gray-400">📞</span>
+                      </div>
+                      <input
+                        type="tel"
+                        placeholder="Enter your phone number"
+                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-painrelief-primary focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <Button
+                  variant="primary"
+                  theme="painrelief"
+                  size="lg"
+                  className="w-full shadow-glow-orange text-lg py-4"
+                >
+                  Get Professional Guide & Pricing
+                </Button>
+
+                <div className="text-center text-sm text-gray-600">
+                  <p>We respect your privacy. Unsubscribe at any time.</p>
+                  <p>By submitting, you agree to our <span className="text-painrelief-primary">Privacy Policy</span>.</p>
+                </div>
+              </form>
+            </motion.div>
+          </div>
         </div>
       </section>
-
-      {/* Lead Capture Form */}
-      <LeadCaptureForm 
-        theme="painrelief"
-        title="Get Your Free Pain Relief Guide"
-        description="Download '7 Natural Ways to Reduce Joint Pain' plus get exclusive offers and pain management tips."
-        buttonText="Get My Free Guide"
-        placeholder="Enter your email for free guide..."
-      />
     </Layout>
   );
 }

@@ -45,10 +45,9 @@ export default function Header({ theme = 'default' }) {
 
   // Navigation items for single page scrolling
   const navigationItems = [
-    { name: 'About Us', href: '#about' },
     { name: 'Products', href: '#products' },
-    { name: 'Benefits', href: '#benefits' },
-    { name: 'Reviews', href: '#testimonials' }
+    { name: 'Reviews', href: '#testimonials' },
+    { name: 'Contact', href: '#contact' }
   ];
 
   // Smooth scroll function
