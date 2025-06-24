@@ -43,6 +43,33 @@ export default function Header({ theme = 'default' }) {
 
   const colors = getThemeColors();
 
+  // Navigation items for single page scrolling
+  const navigationItems = [
+    { name: 'About Us', href: '#about' },
+    { name: 'Products', href: '#products' },
+    { name: 'Benefits', href: '#benefits' },
+    { name: 'Reviews', href: '#testimonials' }
+  ];
+
+  // Smooth scroll function
+  const handleScrollTo = (href, event) => {
+    event.preventDefault();
+    setIsMenuOpen(false);
+    
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        const headerHeight = 80; // Height of sticky header
+        const elementPosition = element.offsetTop - headerHeight;
+        
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
   return (
     <header className={`${colors.bg} shadow-soft sticky top-0 z-50 transition-all duration-300`}>
       <div className="container-custom">
@@ -69,14 +96,15 @@ export default function Header({ theme = 'default' }) {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {sharedContent.navigation.main.map((item) => (
-              <Link
+            {navigationItems.map((item) => (
+              <a
                 key={item.name}
                 href={item.href}
-                className={`${colors.text} hover:${colors.accent} transition-colors duration-300 font-medium`}
+                onClick={(e) => handleScrollTo(item.href, e)}
+                className={`${colors.text} hover:${colors.accent} transition-colors duration-300 font-medium cursor-pointer`}
               >
                 {item.name}
-              </Link>
+              </a>
             ))}
           </nav>
 
@@ -90,12 +118,13 @@ export default function Header({ theme = 'default' }) {
               <span className="font-medium">{sharedContent.contact.phone}</span>
             </a>
             
-            <Link
-              href="/contact"
-              className={`${colors.button} px-6 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105`}
+            <a
+              href="#products"
+              onClick={(e) => handleScrollTo('#products', e)}
+              className={`${colors.button} px-6 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 cursor-pointer`}
             >
               Get Quote
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -118,15 +147,15 @@ export default function Header({ theme = 'default' }) {
               className={`lg:hidden border-t border-gray-200 ${colors.bg}`}
             >
               <div className="py-4 space-y-4">
-                {sharedContent.navigation.main.map((item) => (
-                  <Link
+                {navigationItems.map((item) => (
+                  <a
                     key={item.name}
                     href={item.href}
-                    className={`block ${colors.text} hover:${colors.accent} transition-colors duration-300 font-medium py-2`}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={(e) => handleScrollTo(item.href, e)}
+                    className={`block ${colors.text} hover:${colors.accent} transition-colors duration-300 font-medium py-2 cursor-pointer`}
                   >
                     {item.name}
-                  </Link>
+                  </a>
                 ))}
                 
                 <div className="pt-4 border-t border-gray-200">
@@ -138,13 +167,13 @@ export default function Header({ theme = 'default' }) {
                     <span>{sharedContent.contact.phone}</span>
                   </a>
                   
-                  <Link
-                    href="/contact"
-                    className={`${colors.button} inline-block px-6 py-2 rounded-lg font-semibold mt-2`}
-                    onClick={() => setIsMenuOpen(false)}
+                  <a
+                    href="#products"
+                    onClick={(e) => handleScrollTo('#products', e)}
+                    className={`${colors.button} inline-block px-6 py-2 rounded-lg font-semibold mt-2 cursor-pointer`}
                   >
                     Get Quote
-                  </Link>
+                  </a>
                 </div>
               </div>
             </motion.div>

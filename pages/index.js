@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+// Removed react-icons import to fix component error
 import Layout from '../components/shared/Layout';
 import Button from '../components/shared/Button';
 
@@ -164,28 +165,36 @@ export default function Home() {
               Trusted by Thousands of Customers Worldwide
             </h3>
             
-            <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-              <Image
-                src="/images/trust/australian-made-badge.png"
-                alt="Australian Made"
-                width={120}
-                height={80}
-                className="grayscale"
-              />
-              <Image
-                src="/images/trust/natural-ingredients-badge.png"
-                alt="Natural Ingredients"
-                width={120}
-                height={80}
-                className="grayscale"
-              />
-              <Image
-                src="/images/trust/money-back-guarantee.png"
-                alt="Money Back Guarantee"
-                width={120}
-                height={80}
-                className="grayscale"
-              />
+            <div className="flex flex-wrap justify-center items-center gap-8">
+              <div className="flex flex-col items-center space-y-2 p-4">
+                <div className="w-16 h-16 bg-brand-cream rounded-full flex items-center justify-center">
+                  <div className="text-3xl">🏆</div>
+                </div>
+                <div className="text-center">
+                  <h4 className="font-semibold text-gray-800">Australian Made</h4>
+                  <p className="text-sm text-gray-600">100% Made & Owned</p>
+                </div>
+              </div>
+              
+              <div className="flex flex-col items-center space-y-2 p-4">
+                <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center">
+                  <div className="text-3xl">🌿</div>
+                </div>
+                <div className="text-center">
+                  <h4 className="font-semibold text-gray-800">Natural Ingredients</h4>
+                  <p className="text-sm text-gray-600">All Natural, No Chemicals</p>
+                </div>
+              </div>
+              
+              <div className="flex flex-col items-center space-y-2 p-4">
+                <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center">
+                  <div className="text-3xl">🛡️</div>
+                </div>
+                <div className="text-center">
+                  <h4 className="font-semibold text-gray-800">Money Back Guarantee</h4>
+                  <p className="text-sm text-gray-600">30-Day Guarantee</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

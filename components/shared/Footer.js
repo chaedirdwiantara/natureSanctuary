@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiFacebook, FiInstagram, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
+// Removed react-icons import to fix component error
 import { sharedContent } from '../../lib/content';
 
 export default function Footer({ theme = 'default' }) {
@@ -39,6 +39,20 @@ export default function Footer({ theme = 'default' }) {
 
   const colors = getThemeColors();
 
+  // Function to get appropriate icon for trust badges
+  const getTrustIcon = (badgeName) => {
+    switch (badgeName.toLowerCase()) {
+      case 'australian made':
+        return <div className="w-6 h-6 bg-white bg-opacity-20 rounded flex items-center justify-center text-white text-xs font-bold">AU</div>;
+      case 'natural ingredients':
+        return <div className="w-6 h-6 bg-white bg-opacity-20 rounded flex items-center justify-center text-white text-xs font-bold">🌿</div>;
+      case 'money back guarantee':
+        return <div className="w-6 h-6 bg-white bg-opacity-20 rounded flex items-center justify-center text-white text-xs font-bold">✓</div>;
+      default:
+        return <div className="w-6 h-6 bg-white bg-opacity-20 rounded flex items-center justify-center text-white text-xs font-bold">★</div>;
+    }
+  };
+
   return (
     <footer className={`${colors.bg} ${colors.text}`}>
       {/* Trust Signals Bar */}
@@ -48,13 +62,7 @@ export default function Footer({ theme = 'default' }) {
             {sharedContent.trust.badges.map((badge, index) => (
               <div key={index} className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-white bg-opacity-10 rounded-lg flex items-center justify-center">
-                  <Image
-                    src={badge.image}
-                    alt={badge.name}
-                    width={24}
-                    height={24}
-                    className="opacity-90"
-                  />
+                  {getTrustIcon(badge.name)}
                 </div>
                 <div>
                   <h4 className={`font-semibold text-sm ${colors.text}`}>
@@ -73,72 +81,49 @@ export default function Footer({ theme = 'default' }) {
       {/* Main Footer Content */}
       <div className="py-12">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="text-center">
             {/* Company Info */}
-            <div className="md:col-span-1">
-              <Link href="/" className="flex items-center space-x-3 mb-4">
-                <div className="relative w-10 h-10">
-                  <Image
-                    src="/images/brand/logo-white.svg"
-                    alt="Emu Oil Naturally"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <div>
-                  <h3 className={`font-serif font-bold ${colors.text}`}>
-                    {sharedContent.brand.name}
-                  </h3>
-                  <p className={`text-sm ${colors.accent}`}>
-                    {sharedContent.brand.tagline}
-                  </p>
-                </div>
-              </Link>
-              
-              <p className={`${colors.accent} text-sm mb-6 leading-relaxed`}>
-                Australia's premium emu oil supplier. 100% natural, ethically sourced, 
-                and manufactured to the highest quality standards.
-              </p>
-
-              {/* Social Links */}
-              <div className="flex space-x-4">
-                <a
-                  href={sharedContent.contact.socialMedia.facebook}
-                  className={`${colors.accent} hover:${colors.text} transition-colors duration-300`}
-                  aria-label="Facebook"
-                >
-                  <FiFacebook className="w-5 h-5" />
-                </a>
-                <a
-                  href={sharedContent.contact.socialMedia.instagram}
-                  className={`${colors.accent} hover:${colors.text} transition-colors duration-300`}
-                  aria-label="Instagram"
-                >
-                  <FiInstagram className="w-5 h-5" />
-                </a>
+            <Link href="/" className="inline-flex items-center space-x-3 mb-6">
+              <div className="relative w-12 h-12">
+                <Image
+                  src="/images/brand/logo-white.svg"
+                  alt="Emu Oil Naturally"
+                  fill
+                  className="object-contain"
+                />
               </div>
+              <div>
+                <h3 className={`font-serif font-bold text-xl ${colors.text}`}>
+                  {sharedContent.brand.name}
+                </h3>
+                <p className={`text-sm ${colors.accent}`}>
+                  {sharedContent.brand.tagline}
+                </p>
+              </div>
+            </Link>
+            
+            <p className={`${colors.accent} text-sm mb-8 leading-relaxed max-w-2xl mx-auto`}>
+              Australia's premium emu oil supplier. 100% natural, ethically sourced, 
+              and manufactured to the highest quality standards.
+            </p>
+
+            {/* Social Links */}
+            <div className="flex justify-center space-x-4">
+              <a
+                href={sharedContent.contact.socialMedia.facebook}
+                className={`${colors.accent} hover:${colors.text} transition-colors duration-300`}
+                aria-label="Facebook"
+              >
+                <div className="w-8 h-8 bg-blue-600 rounded-lg text-white text-sm flex items-center justify-center font-bold hover:bg-blue-700 transition-colors">f</div>
+              </a>
+              <a
+                href={sharedContent.contact.socialMedia.instagram}
+                className={`${colors.accent} hover:${colors.text} transition-colors duration-300`}
+                aria-label="Instagram"
+              >
+                <div className="w-8 h-8 bg-pink-600 rounded-lg text-white text-sm flex items-center justify-center font-bold hover:bg-pink-700 transition-colors">ig</div>
+              </a>
             </div>
-
-            {/* Navigation Links */}
-            {sharedContent.navigation.footer.map((section, index) => (
-              <div key={index}>
-                <h4 className={`font-semibold ${colors.text} mb-4`}>
-                  {section.title}
-                </h4>
-                <ul className="space-y-2">
-                  {section.links.map((link) => (
-                    <li key={link.name}>
-                      <Link
-                        href={link.href}
-                        className={`${colors.accent} hover:${colors.text} transition-colors duration-300 text-sm`}
-                      >
-                        {link.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -152,7 +137,7 @@ export default function Footer({ theme = 'default' }) {
                 href={`tel:${sharedContent.contact.phone}`}
                 className={`flex items-center space-x-2 ${colors.accent} hover:${colors.text} transition-colors duration-300`}
               >
-                <FiPhone className="w-4 h-4" />
+                <div className="w-4 h-4 bg-green-600 rounded text-white text-xs flex items-center justify-center font-bold">📞</div>
                 <span className="text-sm">{sharedContent.contact.phone}</span>
               </a>
               
@@ -160,24 +145,21 @@ export default function Footer({ theme = 'default' }) {
                 href={`mailto:${sharedContent.contact.email}`}
                 className={`flex items-center space-x-2 ${colors.accent} hover:${colors.text} transition-colors duration-300`}
               >
-                <FiMail className="w-4 h-4" />
+                <div className="w-4 h-4 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">✉</div>
                 <span className="text-sm">{sharedContent.contact.email}</span>
               </a>
               
               <div className={`flex items-center space-x-2 ${colors.accent}`}>
-                <FiMapPin className="w-4 h-4" />
+                <div className="w-4 h-4 bg-red-600 rounded text-white text-xs flex items-center justify-center font-bold">📍</div>
                 <span className="text-sm">{sharedContent.contact.address}</span>
               </div>
             </div>
 
             <div className="flex items-center space-x-4">
-              <Image
-                src="/images/trust/australian-made-badge.png"
-                alt="Australian Made"
-                width={60}
-                height={40}
-                className="opacity-80"
-              />
+              <div className="flex items-center space-x-2 bg-white bg-opacity-10 px-3 py-2 rounded-lg">
+                <div className="w-5 h-5 bg-white bg-opacity-20 rounded flex items-center justify-center text-white text-xs font-bold">★</div>
+                <span className="text-sm font-semibold text-white">Australian Made</span>
+              </div>
             </div>
           </div>
         </div>

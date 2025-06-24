@@ -135,7 +135,7 @@ export default function LeadCaptureForm({
               {...register('name', { required: 'Name is required' })}
               type="text"
               id="name"
-              className={`form-input pl-10 ${colors.focus} ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+              className={`form-input pl-12 ${colors.focus} ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
               placeholder="Enter your full name"
             />
           </div>
@@ -161,7 +161,7 @@ export default function LeadCaptureForm({
               })}
               type="email"
               id="email"
-              className={`form-input pl-10 ${colors.focus} ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+              className={`form-input pl-12 ${colors.focus} ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
               placeholder="Enter your email address"
             />
           </div>
@@ -181,7 +181,7 @@ export default function LeadCaptureForm({
               {...register('phone')}
               type="tel"
               id="phone"
-              className={`form-input pl-10 ${colors.focus} border-gray-300`}
+              className={`form-input pl-12 ${colors.focus} border-gray-300`}
               placeholder="Enter your phone number"
             />
           </div>

@@ -1,16 +1,58 @@
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Layout from '../../components/shared/Layout';
 import Button from '../../components/shared/Button';
 import LeadCaptureForm from '../../components/shared/LeadCaptureForm';
-import { Icons, FeatureIcons } from '../../components/shared/Icons';
+import { Icons } from '../../components/shared/Icons';
 import { landingPageContent } from '../../lib/content';
 import { developmentImages } from '../../lib/imageRequirements';
 
 export default function SkinCareLanding() {
   const content = landingPageContent.skinCare;
   const images = developmentImages.skinCare;
+
+  // Carousel images
+  const carouselImages = [
+    {
+      src: '/images/hero/muscle-hero.jpg',
+      alt: 'Muscle pain relief with emu oil',
+      title: 'Muscle Pain Relief'
+    },
+    {
+      src: '/images/hero/painrelief-hero.jpg', 
+      alt: 'Natural pain relief solution',
+      title: 'Pain Relief'
+    },
+    {
+      src: '/images/hero/skincare-hero.jpg',
+      alt: 'Natural skin care with emu oil',
+      title: 'Skin Care'
+    }
+  ];
+
+  // Carousel state
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Auto-rotate carousel
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 4000); // Change every 4 seconds
+
+    return () => clearInterval(timer);
+  }, [carouselImages.length]);
+
+  // Manual navigation
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
 
   // Animation hooks
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -24,14 +66,14 @@ export default function SkinCareLanding() {
       meta={content.meta}
     >
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center gradient-skincare overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[80vh] md:min-h-screen flex items-center gradient-skincare overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0 bg-gradient-to-br from-skincare-primary to-skincare-accent"></div>
         </div>
 
-        <div className="container-custom relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container-custom relative z-10 py-8 md:py-0">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -44,10 +86,10 @@ export default function SkinCareLanding() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="inline-block mb-6"
+                className="inline-block mb-4 md:mb-6"
               >
-                <div className="bg-skincare-primary text-white px-6 py-3 rounded-full shadow-glow-green">
-                  <span className="font-bold text-lg">🎉 {content.hero.discount} {content.hero.discountText}</span>
+                <div className="bg-skincare-primary text-white px-4 md:px-6 py-2 md:py-3 rounded-full shadow-glow-green">
+                  <span className="font-bold text-sm md:text-lg">🎉 {content.hero.discount} {content.hero.discountText}</span>
                 </div>
               </motion.div>
 
@@ -55,7 +97,7 @@ export default function SkinCareLanding() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-skincare-accent mb-6 leading-tight"
+                className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-skincare-accent mb-4 md:mb-6 leading-tight"
               >
                 {content.hero.headline}
               </motion.h1>
@@ -64,7 +106,7 @@ export default function SkinCareLanding() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xl text-skincare-accent opacity-80 mb-8 leading-relaxed"
+                className="text-lg md:text-xl text-skincare-accent opacity-80 mb-6 md:mb-8 leading-relaxed"
               >
                 {content.hero.subheading}
               </motion.p>
@@ -73,14 +115,14 @@ export default function SkinCareLanding() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                className="space-y-4 sm:space-y-0 sm:flex sm:flex-row sm:gap-4 justify-center lg:justify-start"
               >
                 <Button
                   variant="primary"
                   theme="skincare"
                   size="lg"
                   href="#products"
-                  className="shadow-glow-green"
+                  className="shadow-glow-green w-full sm:w-auto"
                 >
                   {content.hero.cta} →
                 </Button>
@@ -89,6 +131,7 @@ export default function SkinCareLanding() {
                   theme="skincare"
                   size="lg"
                   href="#testimonials"
+                  className="w-full sm:w-auto"
                 >
                   Read Success Stories
                 </Button>
@@ -116,37 +159,142 @@ export default function SkinCareLanding() {
               </motion.div>
             </motion.div>
 
-            {/* Hero Image */}
+            {/* Hero Carousel */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={heroInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
+                {/* Carousel Images - Full Width Auto Height */}
+                <div className="relative w-full">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentSlide}
+                      initial={{ opacity: 0, x: 300 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -300 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Image
+                        src={carouselImages[currentSlide].src}
+                        alt={carouselImages[currentSlide].alt}
+                        width={1200}
+                        height={600}
+                        className="w-full h-auto object-cover"
+                        priority
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100"
+                >
+                  <FiChevronLeft className="w-6 h-6" />
+                </button>
+                
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100"
+                >
+                  <FiChevronRight className="w-6 h-6" />
+                </button>
+
+                {/* Dots Indicator */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                  {carouselImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        index === currentSlide 
+                          ? 'bg-white shadow-lg' 
+                          : 'bg-white/50 hover:bg-white/80'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <section id="about" className="section-padding bg-white">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-6">
+              About 
+              <span className="text-gradient-skincare"> Emu Oil Naturally</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              Australia's trusted emu oil supplier, providing 100% natural, pharmaceutical-grade emu oil 
+              for comprehensive skin care and pain relief solutions.
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src={images.hero.main}
-                  alt="Natural skin care with emu oil"
+                  src={images.lifestyle[1]}
+                  alt="Australian emu farm"
                   width={600}
-                  height={600}
+                  height={400}
                   className="object-cover"
-                  priority
                 />
-                
-                {/* Floating Product Image */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={heroInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.8, delay: 0.7 }}
-                  className="absolute -bottom-8 -right-8 w-32 h-32 bg-white rounded-full shadow-2xl p-4"
-                >
-                  <Image
-                    src={images.hero.product}
-                    alt="Pure Emu Oil"
-                    fill
-                    className="object-contain p-2"
-                  />
-                </motion.div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="space-y-6"
+            >
+              <div className="space-y-4">
+                <h3 className="text-2xl font-serif font-bold text-gray-800">
+                  One Oil, Multiple Benefits
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  In a world filled with synthetic skincare products and pharmaceutical solutions, 
+                  Emu Oil stands out as a natural wonder with countless benefits. This remarkable oil, 
+                  derived from the fat of the Australian emu bird, has been used for centuries by 
+                  indigenous people and is now gaining global recognition for its exceptional properties.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-skincare-light rounded-xl p-4">
+                  <h4 className="font-bold text-skincare-accent mb-2">🇦🇺 100% Australian Made</h4>
+                  <p className="text-sm text-gray-600">Farmed and manufactured in Australia to the highest quality standards.</p>
+                </div>
+                <div className="bg-skincare-light rounded-xl p-4">
+                  <h4 className="font-bold text-skincare-accent mb-2">🌿 All Natural</h4>
+                  <p className="text-sm text-gray-600">No chemicals, additives, or synthetic ingredients.</p>
+                </div>
+                <div className="bg-skincare-light rounded-xl p-4">
+                  <h4 className="font-bold text-skincare-accent mb-2">🛡️ Non-Steroidal</h4>
+                  <p className="text-sm text-gray-600">Safe alternative without the side effects of steroids.</p>
+                </div>
+                <div className="bg-skincare-light rounded-xl p-4">
+                  <h4 className="font-bold text-skincare-accent mb-2">💰 Cost Effective</h4>
+                  <p className="text-sm text-gray-600">One product for multiple health and beauty concerns.</p>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -154,7 +302,7 @@ export default function SkinCareLanding() {
       </section>
 
       {/* Problems Section */}
-      <section ref={problemsRef} className="section-padding bg-white">
+      <section ref={problemsRef} className="section-padding bg-gray-50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -164,10 +312,10 @@ export default function SkinCareLanding() {
           >
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-6">
               Are You Struggling With These 
-              <span className="text-gradient-skincare"> Skin Problems</span>?
+              <span className="text-gradient-skincare"> Health Problems</span>?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              You're not alone. Thousands of people suffer from chronic skin conditions 
+              You're not alone. Thousands of people suffer from chronic skin conditions and pain 
               that conventional treatments can't seem to fix.
             </p>
           </motion.div>
@@ -179,7 +327,7 @@ export default function SkinCareLanding() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={problemsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-gray-50 rounded-xl p-6 hover:shadow-card transition-all duration-300"
+                className="bg-white rounded-xl p-6 hover:shadow-card transition-all duration-300"
               >
                 <div className="text-4xl mb-4 text-center">{problem.icon}</div>
                 <h3 className="text-xl font-serif font-bold text-gray-800 mb-3 text-center">
@@ -194,8 +342,8 @@ export default function SkinCareLanding() {
         </div>
       </section>
 
-      {/* Solutions Section */}
-      <section ref={solutionsRef} className="section-padding gradient-skincare">
+      {/* Benefits Section */}
+      <section id="benefits" ref={solutionsRef} className="section-padding gradient-skincare">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -204,12 +352,12 @@ export default function SkinCareLanding() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-skincare-accent mb-6">
-              Here's How Emu Oil 
-              <span className="text-skincare-primary"> Solves These Problems</span>
+              Therapeutic Qualities &
+              <span className="text-skincare-primary"> Natural Benefits</span>
             </h2>
             <p className="text-xl text-skincare-accent opacity-80 max-w-3xl mx-auto leading-relaxed">
-              Our pharmaceutical-grade emu oil addresses the root causes of skin problems, 
-              not just the symptoms.
+              What sets emu oil apart is its ability to penetrate deeply into the skin, delivering nutrients 
+              where they are needed most for complete healing.
             </p>
           </motion.div>
 
@@ -333,7 +481,7 @@ export default function SkinCareLanding() {
             <h3 className="text-2xl font-serif font-bold text-skincare-accent mb-8 text-center">
               🌿 For Skin Conditions (Eczema, Psoriasis, Dry Skin)
             </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {content.products.filter(product => product.category === 'skin' || product.category === 'both').map((product, index) => (
                 <motion.div
                   key={product.id}
@@ -343,8 +491,24 @@ export default function SkinCareLanding() {
                   className={`product-card relative ${product.popular ? 'ring-2 ring-skincare-primary' : ''}`}
                 >
                   {product.popular && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-skincare-primary text-white px-4 py-1 rounded-full text-sm font-bold">
+                    <div 
+                      className="absolute left-1/2 transform -translate-x-1/2" 
+                      style={{ 
+                        top: '-8px', 
+                        zIndex: 20 
+                      }}
+                    >
+                      <span 
+                        className="bg-skincare-primary text-white rounded-full font-bold border-2 border-white"
+                        style={{ 
+                          padding: '8px 16px',
+                          fontSize: '12px',
+                          fontWeight: '700',
+                          whiteSpace: 'nowrap',
+                          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                          display: 'inline-block'
+                        }}
+                      >
                         Most Popular
                       </span>
                     </div>
@@ -415,8 +579,24 @@ export default function SkinCareLanding() {
                   className={`product-card relative ${product.popular ? 'ring-2 ring-skincare-primary' : ''}`}
                 >
                   {product.popular && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-skincare-primary text-white px-4 py-1 rounded-full text-sm font-bold">
+                    <div 
+                      className="absolute left-1/2 transform -translate-x-1/2" 
+                      style={{ 
+                        top: '-8px', 
+                        zIndex: 20 
+                      }}
+                    >
+                      <span 
+                        className="bg-skincare-primary text-white rounded-full font-bold border-2 border-white"
+                        style={{ 
+                          padding: '8px 16px',
+                          fontSize: '12px',
+                          fontWeight: '700',
+                          whiteSpace: 'nowrap',
+                          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                          display: 'inline-block'
+                        }}
+                      >
                         Most Popular
                       </span>
                     </div>
