@@ -13,18 +13,6 @@ export default function ContactSection({ formFields }) {
             viewport={{ once: true }}
             className="bg-white rounded-2xl p-8 md:p-12 shadow-2xl"
           >
-            <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Get Your Wholesale Catalog
-              </h2>
-              <p className="text-xl text-gray-700 mb-2">
-                Request our complete wholesale catalog with pricing, product specs, and partnership details
-              </p>
-              <div className="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
-                20% OFF + Free Samples
-              </div>
-            </div>
-
             <CustomLeadForm
               theme="wholesale"
               title="Get Your Wholesale Catalog"
