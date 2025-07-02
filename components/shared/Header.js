@@ -4,7 +4,12 @@ import Image from 'next/image';
 import { FiMenu, FiX, FiPhone } from 'react-icons/fi';
 import { sharedContent } from '../../lib/content';
 
-export default function Header({ theme = 'default', hideNavigation = false }) {
+export default function Header({ 
+  theme = 'default', 
+  hideNavigation = false, 
+  customNavigation = null,
+  customCTATarget = '#products' 
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const getThemeColors = () => {
@@ -46,12 +51,15 @@ export default function Header({ theme = 'default', hideNavigation = false }) {
 
   const colors = getThemeColors();
 
-  // Navigation items for single page scrolling
-  const navigationItems = [
+  // Default navigation items for single page scrolling
+  const defaultNavigationItems = [
     { name: 'Products', href: '#products' },
     { name: 'Reviews', href: '#testimonials' },
     { name: 'Contact', href: '#contact' }
   ];
+
+  // Use custom navigation if provided, otherwise use default
+  const navigationItems = customNavigation || defaultNavigationItems;
 
   // Smooth scroll function
   const handleScrollTo = (href) => {
@@ -131,7 +139,7 @@ export default function Header({ theme = 'default', hideNavigation = false }) {
               </a>
               
               <button
-                onClick={() => handleScrollTo('#products')}
+                onClick={() => handleScrollTo(customCTATarget)}
                 className={`${colors.button} px-6 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 cursor-pointer`}
               >
                 Get Quote
@@ -179,7 +187,7 @@ export default function Header({ theme = 'default', hideNavigation = false }) {
                 
                 <button
                   type="button"
-                  onClick={() => handleScrollTo('#products')}
+                  onClick={() => handleScrollTo(customCTATarget)}
                   className={`${colors.button} px-6 py-2 rounded-lg font-semibold mt-2 cursor-pointer transition-all duration-300`}
                 >
                   Get Quote

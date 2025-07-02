@@ -5,7 +5,7 @@ import { wholesaleFormFields, carouselImages } from '../../lib/wholesaleData';
 // Wholesale-specific components
 import HeroSection from '../../components/wholesale/HeroSection';
 import BenefitsSection from '../../components/wholesale/BenefitsSection';
-import ProductsSection from '../../components/wholesale/ProductsSection';
+import EffectivenessSection from '../../components/wholesale/EffectivenessSection';
 import TestimonialsSection from '../../components/wholesale/TestimonialsSection';
 import PartnershipCTASection from '../../components/wholesale/PartnershipCTASection';
 import ContactSection from '../../components/wholesale/ContactSection';
@@ -13,8 +13,19 @@ import ContactSection from '../../components/wholesale/ContactSection';
 export default function WholesaleLanding() {
   const content = landingPageContent.wholesale;
 
+  // Custom navigation for wholesale page (removing Products and Professional Feedback)
+  const wholesaleNavigation = [
+    { name: 'Effectiveness', href: '#effectiveness' },
+    { name: 'Contact', href: '#contact' }
+  ];
+
   return (
-    <Layout theme="wholesale" meta={content.meta}>
+    <Layout 
+      theme="wholesale" 
+      meta={content.meta}
+      customNavigation={wholesaleNavigation}
+      customCTATarget="#contact"
+    >
       <HeroSection 
         carouselImages={carouselImages}
         productImage={content.hero.productImage}
@@ -22,7 +33,7 @@ export default function WholesaleLanding() {
       
       <BenefitsSection />
       
-      <ProductsSection products={content.products} />
+      <EffectivenessSection />
       
       <TestimonialsSection testimonials={content.testimonials} />
       
