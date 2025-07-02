@@ -17,7 +17,7 @@ export default function ContactSection({ formFields }) {
               theme="wholesale"
               title="Let's Start the Conversation"
               subtitle="Quick. No pressure. We'll follow up personally"
-              offerText="Professional Partnership Inquiry"
+              offerText="No Obligation Partnership Discussion"
               ctaText="Connect with Our Team"
               fields={formFields}
             />
