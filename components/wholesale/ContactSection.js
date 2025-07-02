@@ -15,10 +15,10 @@ export default function ContactSection({ formFields }) {
           >
             <CustomLeadForm
               theme="wholesale"
-              title="Get Your Wholesale Catalog"
-              subtitle="Request our complete wholesale catalog with pricing, product specs, and partnership details"
-              offerText="20% OFF + Free Samples"
-              ctaText="Get Wholesale Catalog"
+              title="Let's Start the Conversation"
+              subtitle="Quick. No pressure. We'll follow up personally"
+              offerText="Professional Partnership Inquiry"
+              ctaText="Connect with Our Team"
               fields={formFields}
             />
           </motion.div>
