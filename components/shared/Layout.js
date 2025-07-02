@@ -31,7 +31,13 @@ export default function Layout({
         <meta name="description" content={meta?.description || 'Premium Australian emu oil products for natural health and skincare.'} />
         <meta name="keywords" content={meta?.keywords || 'emu oil, australian made, natural health, skincare'} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+        <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         
         {/* Open Graph / Social Media */}
         <meta property="og:type" content="website" />
