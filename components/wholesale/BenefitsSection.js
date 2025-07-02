@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { painReliefBenefits, synergisticAdvantages, sectionContent } from '../../lib/painReliefData';
+import ProductBenefitCard from '../shared/ProductBenefitCard';
+import SynergisticSection from '../shared/SynergisticSection';
 
-export default function BenefitsSection({ benefits }) {
+export default function BenefitsSection() {
   const [benefitsRef, benefitsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
@@ -13,32 +16,55 @@ export default function BenefitsSection({ benefits }) {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
-            Why Partner With Us?
-          </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Join Australia's most trusted emu oil wholesale network and grow your business with premium products
-          </p>
+          <div className="flex items-center justify-center mb-6">
+            <span className="text-4xl mr-3">🔥</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900">
+              {sectionContent.title}
+            </h2>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <p className="text-xl text-gray-700 mb-6 leading-relaxed">
+              {sectionContent.subtitle.split('Emu Oil Balm').map((part, index) => 
+                index === 1 ? (
+                  <span key={index}>
+                    <strong>Emu Oil Balm</strong>
+                    {part.split('Emu Oil Capsules')[0]}
+                    <strong>Emu Oil Capsules</strong>
+                    {part.split('Emu Oil Capsules')[1]}
+                  </span>
+                ) : (
+                  <span key={index}>{part}</span>
+                )
+              )}
+            </p>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 inline-block">
+              <p className="text-lg text-blue-800 font-semibold">
+                {sectionContent.callout}
+              </p>
+            </div>
+          </div>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {benefits.map((benefit, index) => (
-            <motion.div
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
+          {painReliefBenefits.map((product, index) => (
+            <ProductBenefitCard
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={benefitsInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="text-center group"
-            >
-              <div className="bg-gradient-to-br from-wholesale-primary to-wholesale-accent text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-glow-blue">
-                {benefit.icon}
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">{benefit.title}</h3>
-              <p className="text-gray-700 mb-3 leading-relaxed">{benefit.description}</p>
-              <p className="text-wholesale-primary font-semibold">{benefit.benefit}</p>
-            </motion.div>
+              product={product}
+              index={index}
+              isInView={benefitsInView}
+              theme="wholesale"
+            />
           ))}
         </div>
+
+        <SynergisticSection
+          title={sectionContent.synergisticTitle}
+          description={sectionContent.synergisticDescription}
+          advantages={synergisticAdvantages}
+          isInView={benefitsInView}
+          theme="wholesale"
+          delay={0.6}
+        />
       </div>
     </section>
   );

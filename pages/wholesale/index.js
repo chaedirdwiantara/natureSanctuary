@@ -20,7 +20,7 @@ export default function WholesaleLanding() {
         productImage={content.hero.productImage}
       />
       
-      <BenefitsSection benefits={content.benefits} />
+      <BenefitsSection />
       
       <ProductsSection products={content.products} />
       
