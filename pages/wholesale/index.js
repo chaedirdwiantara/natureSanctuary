@@ -7,7 +7,7 @@ import HeroSection from '../../components/wholesale/HeroSection';
 import BenefitsSection from '../../components/wholesale/BenefitsSection';
 import EffectivenessSection from '../../components/wholesale/EffectivenessSection';
 import TestimonialsSection from '../../components/wholesale/TestimonialsSection';
-import PartnershipCTASection from '../../components/wholesale/PartnershipCTASection';
+import ReachOutSection from '../../components/wholesale/ReachOutSection';
 import ContactSection from '../../components/wholesale/ContactSection';
 
 export default function WholesaleLanding() {
@@ -37,7 +37,7 @@ export default function WholesaleLanding() {
       
       <TestimonialsSection testimonials={content.testimonials} />
       
-      <PartnershipCTASection />
+      <ReachOutSection />
       
       <ContactSection formFields={wholesaleFormFields} />
     </Layout>
