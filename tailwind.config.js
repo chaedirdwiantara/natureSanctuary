@@ -24,13 +24,13 @@ module.exports = {
           bg: '#fff3e0',
           light: '#ffccbc'
         },
-        // Wholesale Theme
+        // Wholesale Theme (Updated to match Emu Oil Naturally brand)
         wholesale: {
-          primary: '#1565c0',
-          secondary: '#42a5f5',
-          accent: '#0d47a1',
-          bg: '#e3f2fd',
-          light: '#bbdefb'
+          primary: '#f59e0b',
+          secondary: '#fbbf24', 
+          accent: '#d97706',
+          bg: '#fffbeb',
+          light: '#fef3c7'
         },
         // Brand Colors
         brand: {

@@ -93,8 +93,8 @@ export default function Header({
       <div className="container-custom">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3">
-            <div className="relative w-12 h-12">
+          <div className="flex items-center space-x-4">
+            <div className="relative w-16 h-16">
               <Image
                 src="/images/brand/logo-main.svg"
                 alt="Emu Oil Naturally"
@@ -110,7 +110,7 @@ export default function Header({
                 {sharedContent.brand.tagline}
               </p>
             </div>
-          </Link>
+          </div>
 
           {/* Desktop Navigation */}
           {!hideNavigation && (
