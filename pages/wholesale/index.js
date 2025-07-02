@@ -8,6 +8,9 @@ import BenefitsSection from '../../components/wholesale/BenefitsSection';
 import EffectivenessSection from '../../components/wholesale/EffectivenessSection';
 import TestimonialsSection from '../../components/wholesale/TestimonialsSection';
 import ReachOutSection from '../../components/wholesale/ReachOutSection';
+import AboutSection from '../../components/wholesale/AboutSection';
+import PartnershipSection from '../../components/wholesale/PartnershipSection';
+import ReadyToHelpSection from '../../components/wholesale/ReadyToHelpSection';
 import ContactSection from '../../components/wholesale/ContactSection';
 
 export default function WholesaleLanding() {
@@ -16,6 +19,8 @@ export default function WholesaleLanding() {
   // Custom navigation for wholesale page (removing Products and Professional Feedback)
   const wholesaleNavigation = [
     { name: 'Effectiveness', href: '#effectiveness' },
+    { name: 'About', href: '#about' },
+    { name: 'Partnership', href: '#partnership' },
     { name: 'Contact', href: '#contact' }
   ];
 
@@ -38,6 +43,12 @@ export default function WholesaleLanding() {
       <TestimonialsSection testimonials={content.testimonials} />
       
       <ReachOutSection />
+      
+      <AboutSection />
+      
+      <PartnershipSection />
+      
+      <ReadyToHelpSection />
       
       <ContactSection formFields={wholesaleFormFields} />
     </Layout>
