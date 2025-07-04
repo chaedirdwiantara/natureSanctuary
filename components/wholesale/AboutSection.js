@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { companyInfo, aboutSectionContent } from '../../lib/aboutCompanyData';
-import CredentialCard from '../shared/CredentialCard';
 
 export default function AboutSection() {
   const [sectionRef, sectionInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -17,13 +16,13 @@ export default function AboutSection() {
           className="text-center mb-12 md:mb-16"
         >
           <div className="flex items-center justify-center mb-6">
-            <span className="text-4xl mr-3">🏭</span>
+            <img src="/images/brand/logo-main.svg" alt="Emu Tracks Logo" className="w-8 h-8 mr-3" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold wholesale-section-title">
               {aboutSectionContent.title}
             </h2>
           </div>
           <p className="text-xl wholesale-section-subtitle max-w-4xl mx-auto leading-relaxed">
-            {aboutSectionContent.subtitle}
+            <span className="font-bold">{aboutSectionContent.subtitle}</span>
           </p>
         </motion.div>
 
@@ -36,22 +35,13 @@ export default function AboutSection() {
             className="text-center mb-12"
           >
             <p className="text-lg md:text-xl wholesale-section-subtitle leading-relaxed">
-              {companyInfo.about.description}
+              <span className="text-red-600 font-semibold">Our products are</span> developed with 
+              over 25 years of research and <span className="text-red-600 font-semibold">Pure Emu Oil</span> is <span className="font-bold">TGA-listed</span> in 
+              Australia as a therapeutic grade oil.
             </p>
           </motion.div>
 
-          {/* Credentials Grid */}
-          <div className="grid md:grid-cols-1 gap-6 max-w-3xl mx-auto">
-            {companyInfo.about.credentials.map((credential, index) => (
-              <CredentialCard
-                key={index}
-                credential={credential}
-                index={index}
-                isInView={sectionInView}
-                theme="wholesale"
-              />
-            ))}
-          </div>
+
         </div>
 
         {/* Bottom highlight */}
