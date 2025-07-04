@@ -17,7 +17,7 @@ function TestimonialCard({ testimonial, index, testimonialsInView }) {
         ))}
       </div>
 
-      <p className="text-gray-700 mb-6 leading-relaxed italic">
+      <p className="wholesale-text mb-6 leading-relaxed italic">
         "{testimonial.text}"
       </p>
 
@@ -30,8 +30,8 @@ function TestimonialCard({ testimonial, index, testimonialsInView }) {
           className="w-12 h-12 rounded-full object-cover"
         />
         <div>
-          <p className="font-bold text-gray-900">{testimonial.name}</p>
-          <p className="text-sm text-wholesale-primary">{testimonial.business}</p>
+          <p className="font-bold wholesale-card-title">{testimonial.name}</p>
+          <p className="text-sm wholesale-card-text">{testimonial.business}</p>
         </div>
         {testimonial.verified && (
           <div className="ml-auto">
@@ -57,10 +57,10 @@ export default function TestimonialsSection({ testimonials }) {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold wholesale-section-title mb-6">
             What Our Partners Say
           </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+          <p className="text-xl wholesale-section-subtitle max-w-3xl mx-auto">
             Join successful businesses across Australia who trust us as their emu oil supplier
           </p>
         </motion.div>

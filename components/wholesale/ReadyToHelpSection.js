@@ -49,7 +49,7 @@ export default function ReadyToHelpSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={sectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6 group-hover:text-wholesale-primary transition-colors duration-300"
+                className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold wholesale-section-title mb-6 group-hover:text-wholesale-primary transition-colors duration-300"
               >
                 {readyToHelpContent.title}
               </motion.h2>
@@ -59,7 +59,7 @@ export default function ReadyToHelpSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={sectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-8 max-w-3xl mx-auto"
+                className="text-xl md:text-2xl wholesale-section-subtitle leading-relaxed mb-8 max-w-3xl mx-auto"
               >
                 {readyToHelpContent.subtitle}
               </motion.p>
@@ -74,7 +74,7 @@ export default function ReadyToHelpSection() {
                 {readyToHelpContent.highlights.map((highlight, index) => (
                   <div key={index} className="flex items-center space-x-2 text-wholesale-primary">
                     <span className="text-xl">{highlight.icon}</span>
-                    <span className="font-semibold text-gray-700">{highlight.text}</span>
+                    <span className="font-semibold wholesale-card-text">{highlight.text}</span>
                   </div>
                 ))}
               </motion.div>

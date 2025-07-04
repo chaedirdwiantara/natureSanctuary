@@ -111,6 +111,31 @@
     @apply bg-gradient-to-r from-wholesale-accent to-wholesale-primary bg-clip-text text-transparent;
   }
 
+  /* Wholesale Landing Page Custom Colors */
+  .wholesale-title {
+    color: #cf9a2c !important;
+  }
+
+  .wholesale-text {
+    color: #000000 !important;
+  }
+
+  .wholesale-section-title {
+    color: #cf9a2c !important;
+  }
+
+  .wholesale-section-subtitle {
+    color: #000000 !important;
+  }
+
+  .wholesale-card-title {
+    color: #cf9a2c !important;
+  }
+
+  .wholesale-card-text {
+    color: #000000 !important;
+  }
+
   .card-hover {
     @apply transform transition-all duration-300 hover:scale-105 hover:shadow-card;
   }

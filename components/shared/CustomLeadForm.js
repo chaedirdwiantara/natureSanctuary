@@ -105,7 +105,7 @@ export default function CustomLeadForm({
         };
       case 'wholesale':
         return {
-          accent: 'text-wholesale-primary',
+          accent: 'wholesale-section-title',
           focus: 'focus:ring-wholesale-primary focus:border-wholesale-primary'
         };
       default:
@@ -144,10 +144,10 @@ export default function CustomLeadForm({
   return (
     <div className={className}>
       <div className="text-center mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        <h2 className={`text-3xl md:text-4xl font-bold ${theme === 'wholesale' ? 'wholesale-section-title' : 'text-gray-900'} mb-4`}>
           {title}
         </h2>
-        <p className="text-xl text-gray-700 mb-2">
+        <p className={`text-xl ${theme === 'wholesale' ? 'wholesale-section-subtitle' : 'text-gray-700'} mb-2`}>
           {subtitle}
         </p>
         {offerText && (
@@ -161,7 +161,7 @@ export default function CustomLeadForm({
         <div className="grid md:grid-cols-2 gap-6">
           {fields.map((field, index) => (
             <div key={field.name} className={field.fullWidth ? 'md:col-span-2' : ''}>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className={`block text-sm font-medium ${theme === 'wholesale' ? 'wholesale-card-text' : 'text-gray-700'} mb-2`}>
                 {field.label} {field.required && '*'}
               </label>
               <div className="relative">

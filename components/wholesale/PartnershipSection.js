@@ -18,11 +18,11 @@ export default function PartnershipSection() {
         >
           <div className="flex items-center justify-center mb-6">
             <span className="text-4xl mr-3">🤝</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-900">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold wholesale-section-title">
               {partnershipSectionContent.title}
             </h2>
           </div>
-          <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl wholesale-section-subtitle max-w-4xl mx-auto leading-relaxed">
             {partnershipSectionContent.subtitle}
           </p>
         </motion.div>
@@ -35,10 +35,10 @@ export default function PartnershipSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-center mb-12"
           >
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-4">
+            <p className="text-lg md:text-xl wholesale-section-subtitle leading-relaxed mb-4">
               {companyInfo.partnership.description}
             </p>
-            <p className="text-lg text-wholesale-primary font-semibold">
+            <p className="text-lg wholesale-section-title font-semibold">
               Here's what you get with us:
             </p>
           </motion.div>

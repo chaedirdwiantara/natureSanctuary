@@ -48,7 +48,7 @@ export default function ReachOutSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={sectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-wholesale-primary transition-colors duration-300"
+                className="text-2xl md:text-3xl font-bold wholesale-section-title mb-4 group-hover:text-wholesale-primary transition-colors duration-300"
               >
                 ✋ Let Us Reach Out (No Pressure)
               </motion.h2>
@@ -58,7 +58,7 @@ export default function ReachOutSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={sectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6"
+                className="text-lg md:text-xl wholesale-section-subtitle leading-relaxed mb-6"
               >
                 Whether you want to explore wholesale, request a sample, or ask questions — we're here to help.
               </motion.p>
