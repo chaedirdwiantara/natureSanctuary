@@ -17,11 +17,14 @@ export default function SynergisticSection({
         return 'from-painrelief-primary to-painrelief-accent';
       case 'wholesale':
       default:
-        return 'from-wholesale-primary to-wholesale-accent';
+        return null; // Custom gradient for wholesale
     }
   };
 
   const gradient = getThemeGradient();
+  const wholesaleGradientStyle = theme === 'wholesale' ? 
+    { background: 'linear-gradient(to right, #cf9a2c, #e6b84a)' } : 
+    {};
 
   return (
     <motion.div
@@ -30,7 +33,10 @@ export default function SynergisticSection({
       transition={{ duration: 0.8, delay }}
       className="mt-12 text-center"
     >
-      <div className={`bg-gradient-to-r ${gradient} rounded-2xl p-8 md:p-12 text-white max-w-4xl mx-auto`}>
+      <div 
+        className={`${gradient ? `bg-gradient-to-r ${gradient}` : ''} rounded-2xl p-8 md:p-12 text-white max-w-4xl mx-auto`}
+        style={wholesaleGradientStyle}
+      >
         <h3 className="text-2xl md:text-3xl font-bold mb-4">{title}</h3>
         <p className="text-lg md:text-xl mb-6 opacity-90 leading-relaxed">
           {description}

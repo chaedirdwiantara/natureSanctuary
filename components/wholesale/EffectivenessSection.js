@@ -17,7 +17,7 @@ export default function EffectivenessSection() {
           className="text-center mb-12 md:mb-16"
         >
           <div className="flex items-center justify-center mb-6">
-            <span className="text-4xl mr-3">💊</span>
+            <img src="/images/products/fish-oil.png" alt="Fish Oil Capsule" className="w-12 h-12 mr-3" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold wholesale-section-title">
               {effectivenessSectionContent.title}
             </h2>

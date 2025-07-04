@@ -43,8 +43,15 @@ export default function ProductBenefitCard({
       className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group border border-gray-100"
     >
       <div className="text-center mb-6">
-        <div className={`bg-gradient-to-br ${colors.gradient} text-white rounded-full w-20 h-20 flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 ${colors.glow}`}>
-          {product.icon}
+        <div 
+          className={`${theme === 'wholesale' ? '' : `bg-gradient-to-br ${colors.gradient}`} text-white rounded-full w-20 h-20 flex items-center justify-center text-3xl mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 ${colors.glow}`}
+          style={theme === 'wholesale' ? { background: 'linear-gradient(to right, #cf9a2c, #e6b84a)' } : {}}
+        >
+          {product.icon.startsWith('/') ? (
+            <img src={product.icon} alt={product.title} className="w-10 h-10 object-contain" />
+          ) : (
+            product.icon
+          )}
         </div>
         <h3 className="text-2xl font-bold text-gray-900 mb-2">{product.title}</h3>
       </div>
@@ -58,12 +65,7 @@ export default function ProductBenefitCard({
         ))}
       </div>
 
-      <div className="border-t border-gray-200 pt-4">
-        <div className={`${colors.light} rounded-lg p-4`}>
-          <p className={`text-sm font-semibold ${colors.primary} mb-1`}>Wholesale Advantage:</p>
-          <p className="text-sm text-gray-700">{product.wholesale_benefit}</p>
-        </div>
-      </div>
+
     </motion.div>
   );
 } 

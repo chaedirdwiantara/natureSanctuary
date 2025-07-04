@@ -17,7 +17,7 @@ export default function BenefitsSection() {
           className="text-center mb-12 md:mb-16"
         >
           <div className="flex items-center justify-center mb-6">
-            <span className="text-4xl mr-3">🔥</span>
+            <span className="text-4xl mr-3">🌿</span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold wholesale-section-title">
               {sectionContent.title}
             </h2>
@@ -37,11 +37,7 @@ export default function BenefitsSection() {
                 )
               )}
             </p>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 inline-block">
-              <p className="text-lg wholesale-section-title font-semibold">
-                {sectionContent.callout}
-              </p>
-            </div>
+
           </div>
         </motion.div>
 
