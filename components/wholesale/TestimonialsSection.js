@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import Image from 'next/image';
 
 // TestimonialCard Component
 function TestimonialCard({ testimonial, index, testimonialsInView }) {
@@ -11,35 +10,13 @@ function TestimonialCard({ testimonial, index, testimonialsInView }) {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="bg-gray-50 rounded-2xl p-6 md:p-8 relative"
     >
-      <div className="flex items-center space-x-1 mb-4">
-        {[...Array(testimonial.rating)].map((_, i) => (
-          <span key={i} className="text-yellow-400 text-xl">★</span>
-        ))}
-      </div>
-
       <p className="wholesale-text mb-6 leading-relaxed italic">
         "{testimonial.text}"
       </p>
 
-      <div className="flex items-center space-x-4">
-        <Image
-          src={testimonial.image}
-          alt={testimonial.name}
-          width={50}
-          height={50}
-          className="w-12 h-12 rounded-full object-cover"
-        />
-        <div>
-          <p className="font-bold wholesale-card-title">{testimonial.name}</p>
-          <p className="text-sm wholesale-card-text">{testimonial.business}</p>
-        </div>
-        {testimonial.verified && (
-          <div className="ml-auto">
-            <span className="bg-wholesale-primary text-white px-2 py-1 rounded-full text-xs font-bold">
-              Verified
-            </span>
-          </div>
-        )}
+      <div className="text-right">
+        <p className="font-bold wholesale-card-title">— {testimonial.profession}</p>
+        <p className="text-sm wholesale-card-text">{testimonial.location}</p>
       </div>
     </motion.div>
   );
