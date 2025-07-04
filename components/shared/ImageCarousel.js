@@ -7,7 +7,7 @@ export default function ImageCarousel({
   images, 
   autoSlideInterval = 4000,
   className = "",
-  height = "h-[280px] md:h-[350px] lg:h-[400px]"
+  height = "aspect-[2/1]"
 }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -28,7 +28,7 @@ export default function ImageCarousel({
 
   return (
     <div className={`relative rounded-2xl overflow-hidden shadow-2xl group ${className}`}>
-      <div className={`relative w-full ${height} bg-gray-100`}>
+      <div className={`relative w-full ${height} bg-transparent`}>
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -43,7 +43,7 @@ export default function ImageCarousel({
               alt={images[currentSlide].alt}
               width={1600}
               height={800}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover"
               priority
             />
           </motion.div>
