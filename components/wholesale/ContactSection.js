@@ -16,7 +16,7 @@ export default function ContactSection({ formFields }) {
             <CustomLeadForm
               theme="wholesale"
               title="Let's Start the Conversation"
-              subtitle="Quick. No pressure. We'll follow up personally"
+              subtitle="We'll follow up personally"
               offerText="No Obligation Partnership Discussion"
               ctaText="Connect with Our Team"
               fields={formFields}
