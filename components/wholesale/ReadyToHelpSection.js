@@ -64,20 +64,7 @@ export default function ReadyToHelpSection() {
                 {readyToHelpContent.subtitle}
               </motion.p>
 
-              {/* Highlights */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={sectionInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="flex flex-wrap justify-center items-center gap-6 md:gap-8 mb-8"
-              >
-                {readyToHelpContent.highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-center space-x-2 text-wholesale-primary">
-                    <span className="text-xl">{highlight.icon}</span>
-                    <span className="font-semibold wholesale-card-text">{highlight.text}</span>
-                  </div>
-                ))}
-              </motion.div>
+
 
               {/* CTA */}
               <motion.div
@@ -92,9 +79,7 @@ export default function ReadyToHelpSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </div>
-                <p className="text-sm text-gray-600 italic">
-                  {readyToHelpContent.cta.description}
-                </p>
+
               </motion.div>
 
               {/* Decorative elements */}
