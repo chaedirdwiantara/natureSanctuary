@@ -5,7 +5,6 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 export default function ImageCarousel({ 
   images, 
-  productImage, 
   autoSlideInterval = 4000,
   className = "",
   height = "h-[280px] md:h-[350px] lg:h-[400px]"
@@ -77,17 +76,7 @@ export default function ImageCarousel({
         ))}
       </div>
 
-      {productImage && (
-        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-lg">
-          <Image
-            src={productImage}
-            alt="Featured Product"
-            width={60}
-            height={60}
-            className="w-12 h-12 object-contain"
-          />
-        </div>
-      )}
+
     </div>
   );
 } 

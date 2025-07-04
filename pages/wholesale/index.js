@@ -33,7 +33,6 @@ export default function WholesaleLanding() {
     >
       <HeroSection 
         carouselImages={carouselImages}
-        productImage={content.hero.productImage}
       />
       
       <BenefitsSection />

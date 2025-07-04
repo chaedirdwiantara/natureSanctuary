@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import ImageCarousel from '../shared/ImageCarousel';
 
-export default function HeroSection({ carouselImages, productImage }) {
+export default function HeroSection({ carouselImages }) {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
@@ -82,7 +82,6 @@ export default function HeroSection({ carouselImages, productImage }) {
           >
             <ImageCarousel
               images={carouselImages}
-              productImage={productImage}
               autoSlideInterval={4000}
             />
           </motion.div>
