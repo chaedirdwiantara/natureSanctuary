@@ -17,14 +17,11 @@ export default function PartnershipSection() {
           className="text-center mb-12 md:mb-16"
         >
           <div className="flex items-center justify-center mb-6">
-            <span className="text-4xl mr-3">🤝</span>
+            <img src="/images/brand/logo-main.svg" alt="Emu Oil Naturally Logo" className="w-8 h-8 mr-3" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold wholesale-section-title">
               {partnershipSectionContent.title}
             </h2>
           </div>
-          <p className="text-xl wholesale-section-subtitle max-w-4xl mx-auto leading-relaxed">
-            {partnershipSectionContent.subtitle}
-          </p>
         </motion.div>
 
         {/* Content */}
@@ -36,7 +33,7 @@ export default function PartnershipSection() {
             className="text-center mb-12"
           >
             <p className="text-lg md:text-xl wholesale-section-subtitle leading-relaxed mb-4">
-              {companyInfo.partnership.description}
+              We're <span className="font-bold">Nature Sanctuary Pte Ltd</span>, the exclusive distributor of Emu Tracks products in Singapore & Malaysia.
             </p>
             <p className="text-lg wholesale-section-title font-semibold">
               Here's what you get with us:
