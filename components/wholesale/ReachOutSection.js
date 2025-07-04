@@ -50,7 +50,7 @@ export default function ReachOutSection() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="text-2xl md:text-3xl font-bold wholesale-section-title mb-4 group-hover:text-wholesale-primary transition-colors duration-300"
               >
-                ✋ Let Us Reach Out (No Pressure)
+                ✋ Let Us Reach Out
               </motion.h2>
 
               {/* Description */}
@@ -91,26 +91,7 @@ export default function ReachOutSection() {
             </div>
           </div>
 
-          {/* Bottom subtle indicators */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={sectionInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex justify-center items-center space-x-6 mt-8 text-sm text-gray-500"
-          >
-            <div className="flex items-center space-x-2">
-              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-              <span>No obligation</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-              <span>Quick response</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-              <span>Expert guidance</span>
-            </div>
-          </motion.div>
+
         </motion.div>
       </div>
     </section>
